@@ -7,55 +7,61 @@ import json
 # unhashable type: 'list'
 # 原因是列表是可变的type，而字典中的哈希类型必须是不可变得type，比如元组。
 
-url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
-
-Cookie = "Path=/; isPortal=false; TWFID=0c2ca1be46ced713; JSESSIONID=6CE49C422AFB6F33A2AAE3C8CC95AA65; Path=/"
-
-headers = {
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4412.0 Safari/537.36 Edg/90.0.796.0',
-    'Cookie': Cookie}
-
-data = {'xnxqh': '2021-2022-2',
-        'skyx': '',
-        'xqid': '1'}
-
-course = requests.post(url, headers=headers, data=data)
-
-html = etree.HTML(course.text)
-# result = etree.tostring(html).decode('utf-8')
-# print(result)
 
 
-result = html.xpath('//tr')
-# print(result)   #element对象的列表形式，
+def get_table():
+    url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
+    # --------可能需要外部变量！
+    Cookie = "Path=/; isPortal=false; TWFID=4eeccb0909c27f11; Path=/; JSESSIONID=3BF1D0382EE11EB0A0C53588F10E34CC"
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4412.0 Safari/537.36 Edg/90.0.796.0',
+        'Cookie': Cookie}
+    #--------可能需要外部变量！
+    data = {'xnxqh': '2021-2022-2',
+            'skyx': '',
+            'xqid': '1'}
 
-table = []
+    course = requests.post(url, headers=headers, data=data)
 
-# 从第三行开始,前两行是星期和节数
-for tri in range(2, len(result)):
-    td = result[tri].xpath('.//td/nobr')
-    classroom_name = td[0].xpath('./text()')
-    # print(classroom_name)
+    html = etree.HTML(course.text)
+    # result = etree.tostring(html).decode('utf-8')
+    # print(result)
 
-    tr_cell = [classroom_name]
-    for tdi in range(1, len(td)):
-        tr_cell.append(td[tdi].xpath('./div/text()'))
+    result = html.xpath('//tr')
+    # print(result)   #element对象的列表形式，
 
-    # print(tr_cell)
+    table = []
 
-    table.append(tr_cell)
+    # 从第三行开始,前两行是星期和节数
+    for tri in range(2, len(result)):
+        td = result[tri].xpath('.//td/nobr')
+        classroom_name = td[0].xpath('./text()')
+        # print(classroom_name)
 
-# print(table[0])
+        tr_cell = [classroom_name]
+        for tdi in range(1, len(td)):
+            tr_cell.append(td[tdi].xpath('./div/text()'))
+
+        # print(tr_cell)
+
+        table.append(tr_cell)
+
+    # print(table[0])
+    return table
 
 
-all_week = 7
-day_course = 6
-# 用于记录所有的教室名称，便于遍历
-all_classroom = []
+
 
 
 def get_course_on_table(table):
     course_on_table = multidict()
+    all_week = 7
+    # --------可能需要外部变量！
+    day_course = 6
+    # 用于记录所有的教室名称，便于遍历
+    all_classroom = []
+
+
     for tr in table:
         # 每行第一个cell是教室名
         classroom_name = tr[0][0]
@@ -96,7 +102,7 @@ def get_course_on_table(table):
                 # print(set(week_on))
                 # print(course_on_table[classroom_name][week_i+1][course_i+1])
 
-    return course_on_table
+    return course_on_table,all_classroom
 
 
 def cell_parse(cell):
@@ -196,7 +202,8 @@ def load_dict(filename):
     return dic
 
 if __name__ == '__main__':
-    course_on_table = get_course_on_table(table)
+    table=get_table()
+    course_on_table,all_classroom = get_course_on_table(table)
     # 保存课表字典
     save_dict("./static/data/course_on_table.json",course_on_table)
     # joblib.dump(course_on_table, './static/data/course_on_table.pkl',compress=3)
