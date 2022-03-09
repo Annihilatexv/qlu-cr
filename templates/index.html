@@ -21,7 +21,7 @@
     <h3 style = "text-align:center" >{{dt}} {{hm}}</h3>
 
 
-    <h3>查询空教室</h3>
+    <h3 style = "text-align:center" >查询空教室</h3>
     <form action="/post" METHOD="post">
         <p  style = "text-align:center" ><label for="weeks">周数 </label><input id="weeks" type="text" name="weeks" placeholder="当前是第{{weeks}}周(默认)，可不填"></p>
         <p  style = "text-align:center" ><label for="week_i"> 星期 </label><input id="week_i" type="text" name="week_i" placeholder="现在是星期{{week_i}}(默认)，可不填"></p>
@@ -33,7 +33,7 @@
 
 
 
-    <h3>当前图书馆座位情况</h3>
+    <h3 style = "text-align:center" >当前图书馆座位情况</h3>
     <div style="border:1px solid #999;padding:3px; ">
         <h4>以下区域有座</h4>
         {% for area in av_seat_list %}
