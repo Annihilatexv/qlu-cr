@@ -26,7 +26,7 @@ def qury_room(week_now,week_i_now,course_i_now):
 
     week_now = [i for i in week_now.split()]
     week_i_now = [i for i in week_i_now.split()]
-    course_i_now = [i for i in course_i_now]
+    course_i_now = [i for i in course_i_now.split()]
 
 
     # 查找所有教室中，对应时间无课的
