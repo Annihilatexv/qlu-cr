@@ -57,7 +57,7 @@ def get():
 @app.route("/post", methods=["POST"])
 def post():
     dt, hm = get_time()
-    is_today =0
+    is_today =1
 
     weeks,week_i=school_schedule()
     weeks,week_i=str(weeks),str(week_i)
@@ -68,10 +68,12 @@ def post():
 
     if dic_form['weeks']:
         weeks=dic_form['weeks']
-    elif dic_form['week_i']:
+        is_today = 0
+    if dic_form['week_i']:
         week_i=dic_form['week_i']
-    else:
-        is_today=1
+        is_today = 0
+
+
 
     #print("--%%%%%%%%---------------------\n", os.getcwd())
     # for root, dirs, files in os.walk(os.getcwd()):
