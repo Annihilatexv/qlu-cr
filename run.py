@@ -22,15 +22,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    dt,hm=get_time()
+
     weeks,week_i=school_schedule()
 
-
+    dt, hm = get_time()
     #查询总的空座信息
     try:
         av_seat_list,un_seat_list=query(get_time())
     except:
-        av_seat_list, un_seat_list = ["似乎挂掉了。。。"], ["似乎挂掉了。。。"]
+        av_seat_list, un_seat_list = [{'area_name':"似乎挂掉了。。。"}], [{'area_name':"似乎挂掉了。。。"}]
 
     return render_template("index.html",weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list)
 
@@ -57,6 +57,7 @@ def get():
 @app.route("/post", methods=["POST"])
 def post():
     dt, hm = get_time()
+    is_today =0
 
     weeks,week_i=school_schedule()
     weeks,week_i=str(weeks),str(week_i)
@@ -67,8 +68,10 @@ def post():
 
     if dic_form['weeks']:
         weeks=dic_form['weeks']
-    if dic_form['week_i']:
+    elif dic_form['week_i']:
         week_i=dic_form['week_i']
+    else:
+        is_today=1
 
     #print("--%%%%%%%%---------------------\n", os.getcwd())
     # for root, dirs, files in os.walk(os.getcwd()):
@@ -79,8 +82,31 @@ def post():
     #course_on_table = load_dict(r"./static/data/course_on_table.json")
 
     available_room=qury_room(weeks,week_i,dic_form['course_i'])
+    # 查询完后时间信息进行处理显示
+    if is_today:
+         today= '今天'
+         weeks,week_i='',''
+    else:
+        today=''
+        weeks='第'+weeks+'周'
+        week_i='星期'+week_i
 
-    return render_template("result.html",dt=dt, hm=hm, available_room=available_room)
+    co = "".join((lambda x: (x.sort(), x)[1])(list(dic_form['course_i'])))
+    course_i='第'
+    for i in co:
+        course_i=course_i+str(int(i)*2-1)+str(int(i)*2)+','
+    course_i=course_i[:-1]+'节课'
+
+
+    dt, hm = get_time()
+    #查询总的空座信息
+    try:
+        av_seat_list,un_seat_list=query(get_time())
+    except:
+        av_seat_list, un_seat_list = [{'area_name':"似乎挂掉了。。。"}], [{'area_name':"似乎挂掉了。。。"}]
+
+
+    return render_template("result.html",dt=dt, hm=hm,weeks=weeks,week_i=week_i,course_i=course_i,today=today, available_room=available_room ,av_seat_list=av_seat_list,un_seat_list=un_seat_list)
 
 
 
