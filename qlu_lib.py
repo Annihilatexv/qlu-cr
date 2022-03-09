@@ -191,24 +191,24 @@ def query(time):
     un_seat_list.sort(key=name_sort)
 
 
-    print('*'*30,'\n以下区域有座：\n','-'*30)
+    # print('*'*30,'\n以下区域有座：\n','-'*30)
     floor_now=av_seat_list[0]['area_name'][0:1]
 
     for f in av_seat_list:
         if floor_now!=f['area_name'][0:1]:
             print('-'*30)
             floor_now=f['area_name'][0:1]
-        print('{:>2d} : {} 剩余空座数:{}'.format(f['area_id'],f['area_name'],f['available_num']))
+        # print('{:>2d} : {} 剩余空座数:{}'.format(f['area_id'],f['area_name'],f['available_num']))
     
 
-    print('*'*30,'\n以下区域无座：\n','-'*30)
-    floor_now=un_seat_list[0]['area_name'][0:1]
-
-    for f in un_seat_list:
-        if floor_now!=f['area_name'][0:1]:
-            print('-'*30)
-            floor_now=f['area_name'][0:1]
-        print('{:>2d} : {} '.format(f['area_id'],f['area_name']))
+    # print('*'*30,'\n以下区域无座：\n','-'*30)
+    # floor_now=un_seat_list[0]['area_name'][0:1]
+    #
+    # for f in un_seat_list:
+    #     if floor_now!=f['area_name'][0:1]:
+    #         print('-'*30)
+    #         floor_now=f['area_name'][0:1]
+    #     print('{:>2d} : {} '.format(f['area_id'],f['area_name']))
     
     return av_seat_list,un_seat_list
 
