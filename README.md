@@ -1,6 +1,6 @@
 # qlu-cr
  查询校内空教室
-> [demo 地址]([http:\\baidu.com](https://qlu-cr.herokuapp.com/))
+> [demo 地址](https://qlu-cr.herokuapp.com/)
 
 
 
