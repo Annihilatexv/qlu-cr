@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.5, user-scalable=yes">
 
 
 
@@ -18,25 +18,22 @@
 
 
 <body>
-    <h3>当前日期[{{dt}}] <br> 当前时间[{{hm}}]</h3>
+    <h3 style = "text-align:center" >{{dt}} {{hm}}</h3>
 
 
     <h3>查询空教室</h3>
     <form action="/post" METHOD="post">
-        <p><label for="weeks">周数 </label><input id="weeks" type="text" name="weeks" placeholder="当前是第{{weeks}}周(默认)，可不填"></p>
-        <p><label for="week_i"> 星期 </label><input id="week_i" type="text" name="week_i" placeholder="现在是星期{{week_i}}(默认)，可不填"></p>
-        <p><label for="course_i"> 上课节数 </label><input id="course_i" type="text" name="course_i" placeholder="必填，例如: 34" required></p>
-
-
-
-
-        <p><input type="submit"></p>
+        <p  style = "text-align:center" ><label for="weeks">周数 </label><input id="weeks" type="text" name="weeks" placeholder="当前是第{{weeks}}周(默认)，可不填"></p>
+        <p  style = "text-align:center" ><label for="week_i"> 星期 </label><input id="week_i" type="text" name="week_i" placeholder="现在是星期{{week_i}}(默认)，可不填"></p>
+        <p  style = "text-align:center" ><label for="course_i"> 上课节数 </label><input id="course_i" type="text" name="course_i" placeholder="必填，回车提交" required></p>
+        <p  style = "text-align:center" >例如：12 （代表查询整个上午的空教室）</p>
+        <p  style = "text-align:center"><input type="submit" value="查询"></p>
     </form>
 
 
 
 
-    <h3>图书馆座位情况</h3>
+    <h3>当前图书馆座位情况</h3>
     <div style="border:1px solid #999;padding:3px; ">
         <h4>以下区域有座</h4>
         {% for area in av_seat_list %}
