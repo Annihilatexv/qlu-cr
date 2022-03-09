@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.5, user-scalable=yes">
+
+
+
 
     <title>齐鲁工业大学 空教室查询</title>
     <style>
@@ -15,9 +18,9 @@
 
 
 <body>
-    <h3>当前日期[{{dt}}] <br> 当前时间[{{hm}}]</h3>
-
-    <h3>查询结果</h3>
+    <h3 style = "text-align:center" >{{dt}} {{hm}}</h3>
+    <h4 style = "text-align:center">{{weeks}} {{week_i}}{{today}}<br>{{course_i}}</h4>
+    <h3 style = "text-align:center" >查询结果：</h3>
     <div style="border:3px solid #999;padding:3px; ">
         <h4>以下教室可用</h4>
         {% for room in available_room %}
@@ -27,7 +30,7 @@
 
 
 
-    <h3>图书馆座位情况</h3>
+    <h3>当前图书馆座位情况</h3>
     <div style="border:1px solid #999;padding:3px; ">
         <h4>以下区域有座</h4>
         {% for area in av_seat_list %}
