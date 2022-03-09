@@ -24,8 +24,8 @@ def qury_room(week_now,week_i_now,course_i_now):
     all_classroom = joblib.load(r'./static/data/all_classroom.pkl')
     course_on_table = load_dict("./static/data/course_on_table.json")
 
-    week_now = [i for i in week_now]
-    week_i_now = [i for i in week_i_now]
+    week_now = [i for i in week_now.split()]
+    week_i_now = [i for i in week_i_now.split()]
     course_i_now = [i for i in course_i_now]
 
 
