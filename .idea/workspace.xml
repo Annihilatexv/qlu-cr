@@ -124,8 +124,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.run" />
-        <item itemvalue="Python.get_schedule" />
         <item itemvalue="Python.get_course_on_table" />
+        <item itemvalue="Python.get_schedule" />
         <item itemvalue="Python.qury_classroom" />
       </list>
     </recent_temporary>
@@ -140,7 +140,7 @@
       <updated>1646738568476</updated>
       <workItem from="1646738571569" duration="2407000" />
       <workItem from="1646748120939" duration="4603000" />
-      <workItem from="1646781964138" duration="3340000" />
+      <workItem from="1646781964138" duration="8836000" />
     </task>
     <servers />
   </component>
@@ -161,8 +161,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/qlu_cr$get_schedule.coverage" NAME="get_schedule Coverage Results" MODIFIED="1646782604176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/qlu_cr$get_course_on_table.coverage" NAME="get_course_on_table Coverage Results" MODIFIED="1646752274698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/qlu_cr$run.coverage" NAME="run Coverage Results" MODIFIED="1646784040094" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/qlu_cr$get_course_on_table.coverage" NAME="get_course_on_table Coverage Results" MODIFIED="1646805738626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/qlu_cr$run.coverage" NAME="run Coverage Results" MODIFIED="1646805908678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/qlu_cr$qury_classroom.coverage" NAME="qury_classroom Coverage Results" MODIFIED="1646748558199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
