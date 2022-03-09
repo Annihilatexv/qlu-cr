@@ -1,0 +1,111 @@
+html,body{
+    margin: 0;
+    height: 90%;
+
+}
+
+body{
+    /* 元素居于正中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn{
+   width: 390px;
+   height: 120px;
+   /* 文字颜色为白色 */
+   color: #fff;
+   /* button背景色为渐变蓝色 */
+   background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+   /* 字体设置 */
+   font-family: 'Lato', sans-serif;
+   font-weight: 500;
+   /* 圆角处理 */
+   border-radius: 10px;
+   /* button阴影设置 */
+   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+   7px 7px 20px 0px rgba(0, 0, 0, .1),
+   4px 4px 5px 0px rgba(0, 0, 0, .1);
+   /* 设置过渡属性  所以元素过渡 持续时间：0.3s 速度曲线类型：ease*/
+   transition: all 0.3s ease;
+   /* 鼠标停留时，变为小手 */
+   cursor: pointer;
+   border: none;
+   position: relative;
+   /* 行高  */
+   line-height: 120px;
+   padding: 0;
+}
+.btn span{
+    /* 相对定位 */
+    position: relative;
+    /* 块级元素 */
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 48px;
+}
+.btn::before,.btn::after{
+    /* 绝对定位 */
+    position:absolute;
+    /* content必须有 不然不显示 */
+    content: '';
+    /* 定位右上角 */
+    top: 0;
+    right: 0;
+    /* 背景色：蓝色 */
+    background: rgba(2, 126, 251, 1);
+    transition: all 0.3s ease;
+}
+.btn::before{
+    /* 初始化 */
+    width: 0;
+    height: 2px;
+}
+.btn::after{
+    height: 0;
+    width: 2px;
+}
+.btn span::before,
+.btn span::after{
+    /* 绝对定位 */
+    position:absolute;
+    content: '';
+    /* 定位左下角 */
+    bottom: 0;
+    left: 0;
+    background: rgba(2, 126, 251, 1);
+    transition: all 0.3s ease;
+}
+.btn span::before{
+    width: 0;
+    height: 2px;
+}
+.btn span::after{
+    height: 0;
+    width: 2px;
+}
+
+.btn:hover{
+    /* 背景透明 */
+    background: transparent;
+    /* 字体色变为：蓝色 */
+    color: rgba(2, 126, 251, 1);
+}
+
+.btn:hover::before{
+    /* 宽度过渡为100% */
+    width: 100%;
+}
+.btn:hover::after{
+    /* 高度过渡为100% */
+    height: 100%;
+}
+.btn span:hover::before{
+    width: 100%;
+}
+.btn span:hover::after{
+    height: 100%;
+}
+
+
