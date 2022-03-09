@@ -1,0 +1,7 @@
+requests
+pytz
+Flask
+gunicorn
+lxml
+joblib
+

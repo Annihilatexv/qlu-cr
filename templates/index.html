@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+
+
+
+    <title>齐鲁工业大学 空教室查询</title>
+    <style>
+        body {
+            width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+
+<body>
+    <h3>当前日期[{{dt}}] <br> 当前时间[{{hm}}]</h3>
+
+
+    <h3>查询空教室</h3>
+    <form action="/post" METHOD="post">
+        <p><label for="weeks">周数 </label><input id="weeks" type="text" name="weeks" placeholder="当前是第{{weeks}}周(默认)，可不填"></p>
+        <p><label for="week_i"> 星期 </label><input id="week_i" type="text" name="week_i" placeholder="现在是星期{{week_i}}(默认)，可不填"></p>
+        <p><label for="course_i"> 上课节数 </label><input id="course_i" type="text" name="course_i" placeholder="必填，例如: 34" required></p>
+
+
+
+
+        <p><input type="submit"></p>
+    </form>
+
+
+
+
+    <h3>图书馆座位情况</h3>
+    <div style="border:1px solid #999;padding:3px; ">
+        <h4>以下区域有座</h4>
+        {% for area in av_seat_list %}
+        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; 剩余空座：{{area.available_num}}</li>
+        {% endfor %}
+    </div>
+
+
+    <div style="border:1px solid #999;padding:3px; ">
+        <h4>以下区域无座</h4>
+
+        {% for area in un_seat_list %}
+        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; 剩余空座：{{area.available_num}}</li>
+        {% endfor %}
+    </div>
+
+
+    <div align="center">
+        <a href="https://github.com/Annihilatexv/qlu-cr">
+            <img src="./static/img/github.png" alt="github.png" border="0" width="50" height="50" align="middle" />
+        </a>
+    </div>
+    <!-- get示例  -->
+    <!--
+    <h3>GET请求</h3>
+    <p><a href="/get ">get</a></p>
+    -->
+</body>
+
+
+</html>
