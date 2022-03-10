@@ -167,9 +167,12 @@ def query(time):
     # 楼层区域 信息
     total_url = "http://yuyue.lib.qlu.edu.cn/api.php/areas/0/date/%s" % time[0]
 
-
-    # 不需要session
-    total_info=requests.get(total_url,headers=headers)
+    # 或许在图书馆崩了的时候有所帮助
+    try:
+        # 不需要session
+        total_info=requests.get(total_url,headers=headers)
+    except:
+        return [{'area_name': "似乎挂掉了。。"}], [{'area_name': "似乎挂掉了。。"}]
 
     # 判断是否访问成功
     if total_info.status_code != 200:
