@@ -169,7 +169,13 @@ def query(time):
 
 
     # 不需要session
-    total_info=requests.get(total_url,headers=headers).json()
+    total_info=requests.get(total_url,headers=headers)
+
+    # 判断是否访问成功
+    if total_info.status_code!=200:
+        return "似乎挂掉了。。。"
+
+    total_info=total_info.json()
     av_seat_list=[] #  记录每个区域空座信息，便于按楼层输出
     un_seat_list=[] #  记录每个区域非空座信息，便于按楼层输出
     for cd_area in total_info['data']['list']['childArea']:
