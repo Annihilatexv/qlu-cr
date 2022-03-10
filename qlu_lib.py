@@ -172,8 +172,9 @@ def query(time):
     total_info=requests.get(total_url,headers=headers)
 
     # 判断是否访问成功
-    if total_info.status_code!=200:
-        return "似乎挂掉了。。。"
+    if total_info.status_code != 200:
+        print(total_info.status_code, '图书馆已崩')
+        return [{'area_name':"似乎挂掉了。。"}], [{'area_name':"似乎挂掉了。。"}]
 
     total_info=total_info.json()
     av_seat_list=[] #  记录每个区域空座信息，便于按楼层输出
