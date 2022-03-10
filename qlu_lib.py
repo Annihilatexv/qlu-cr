@@ -172,7 +172,7 @@ def query(time):
         # 不需要session
         total_info=requests.get(total_url,headers=headers)
     except:
-        return [{'area_name': "似乎挂掉了。。"}], [{'area_name': "似乎挂掉了。。"}]
+        return [{'area_name': "似乎挂掉了。"}], [{'area_name': "似乎挂掉了。"}]
 
     # 判断是否访问成功
     if total_info.status_code != 200:
