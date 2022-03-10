@@ -28,10 +28,10 @@ def index():
     dt, hm = get_time()
     #查询总的空座信息
     av_seat_list, un_seat_list = [{'area_name': "似乎挂掉了。。。"}], [{'area_name': "似乎挂掉了。。。"}]
-    # try:
-    #     av_seat_list,un_seat_list=query(get_time())
-    # except:
-    #     pass
+    try:
+        av_seat_list,un_seat_list=query(get_time())
+    except:
+        pass
 
     return render_template("index.html",weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list)
 
