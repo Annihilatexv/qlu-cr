@@ -26,15 +26,31 @@ def index():
     weeks,week_i=school_schedule()
 
     dt, hm = get_time()
-    #查询总的空座信息
-    try:
-        av_seat_list,un_seat_list=query(get_time())
-    except:
-        av_seat_list, un_seat_list = [{'area_name':"似乎挂掉了。。。"}], [{'area_name':"似乎挂掉了。。。"}]
+    av_seat_list, un_seat_list = [{'area_name': "似乎挂掉了。。。"}], [{'area_name': "似乎挂掉了。。。"}]
+    if is_lib_ok(dt):
+        #查询总的空座信息
+        try:
+            av_seat_list,un_seat_list=query(get_time())
+        except:
+            pass
+
 
     return render_template("index.html",weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list)
 
 
+def is_lib_ok(dt):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4706.0 Safari/537.36 Edg/98.0.1084.0",
+        "Referer": "http://yuyue.lib.qlu.edu.cn"
+    }
+
+    total_url = "http://yuyue.lib.qlu.edu.cn/api.php/areas/0/date/%s" % dt
+
+    total_info = requests.get(total_url, headers=headers)
+    if total_info.status_code != 200:
+        return 0
+    else:
+        return 1
 
 
 @app.route("/get")
@@ -74,14 +90,6 @@ def post():
         is_today = 0
 
 
-
-    #print("--%%%%%%%%---------------------\n", os.getcwd())
-    # for root, dirs, files in os.walk(os.getcwd()):
-    #     print('当前目录路径',root)  # 当前目录路径
-    #     print('当前路径下所有子目录',dirs)  # 当前路径下所有子目录
-
-
-    #course_on_table = load_dict(r"./static/data/course_on_table.json")
 
     available_room=qury_room(weeks,week_i,dic_form['course_i'])
     # 查询完后时间信息进行处理显示
