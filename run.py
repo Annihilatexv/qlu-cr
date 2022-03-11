@@ -27,29 +27,16 @@ def index():
 
     dt, hm = get_time()
     av_seat_list, un_seat_list = [{'area_name': "似乎挂掉了。。。"}], [{'area_name': "似乎挂掉了。。。"}]
-    if is_lib_ok(dt):
-        #查询总的空座信息
-        try:
-            av_seat_list,un_seat_list=query(get_time())
-        except:
-            pass
+
+    try:
+        av_seat_list,un_seat_list=query(get_time())
+    except:
+        pass
 
     return render_template("index.html",weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list)
 
 
-def is_lib_ok(dt):
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4706.0 Safari/537.36 Edg/98.0.1084.0",
-        "Referer": "http://yuyue.lib.qlu.edu.cn"
-    }
 
-    total_url = "http://yuyue.lib.qlu.edu.cn/api.php/areas/0/date/%s" % dt
-
-    total_info = requests.get(total_url, headers=headers)
-    if total_info.status_code != 200:
-        return 0
-    else:
-        return 1
 
 
 @app.route("/get")
@@ -80,6 +67,11 @@ def post():
 
     # 捕获收到的表单
     dic_form= request.form
+
+    cri = request.form.getlist('cri')
+    print('收到的表单为：',dic_form)
+    print('checkbox:',cri)
+
 
     if dic_form['weeks']:
         weeks=dic_form['weeks']

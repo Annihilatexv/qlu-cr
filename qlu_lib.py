@@ -170,7 +170,7 @@ def query(time):
     # 或许在图书馆崩了的时候有所帮助
     try:
         # 不需要session
-        total_info=requests.get(total_url,headers=headers)
+        total_info=requests.get(total_url,headers=headers, timeout=0.001)
     except:
         return [{'area_name': "似乎挂掉了。"}], [{'area_name': "似乎挂掉了。"}]
 
