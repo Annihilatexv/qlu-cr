@@ -170,14 +170,14 @@ def query(time):
     # 或许在图书馆崩了的时候有所帮助
     try:
         # 不需要session
-        total_info=requests.get(total_url,headers=headers, timeout=0.001)
+        total_info=requests.get(total_url,headers=headers,timeout=0.8)
     except:
-        return [{'area_name': "似乎挂掉了。"}], [{'area_name': "似乎挂掉了。"}]
+        return [{'area_name': "当前响应过慢，不予访问，减少图书馆压力"}], [{'area_name': "当前响应过慢，不予访问，减少图书馆压力"}],''
 
     # 判断是否访问成功
     if total_info.status_code != 200:
         print(total_info.status_code, '图书馆已崩')
-        return [{'area_name':"似乎挂掉了。。"}], [{'area_name':"似乎挂掉了。。"}]
+        return [{'area_name':"当前不可用。。"}], [{'area_name':"当前不可用。。"}]
 
     total_info=total_info.json()
     av_seat_list=[] #  记录每个区域空座信息，便于按楼层输出
@@ -189,9 +189,9 @@ def query(time):
             # is_available其实可以不要了,因为已经排除 None 了 
             if is_available([cd_area['TotalCount'],cd_area['UnavailableSpace']]): #证明这里有座位
                 available_num=int(cd_area['TotalCount'])-int(cd_area['UnavailableSpace'])
-                av_seat_list.append({'area_id':cd_area['id'],'area_name':cd_area['name'],'available_num':available_num})
+                av_seat_list.append({'area_id':"%2d"%cd_area['id'],'area_name':cd_area['name'],'available_num':available_num})
             else:
-                un_seat_list.append({'area_id':cd_area['id'],'area_name':cd_area['name'],'available_num':0})
+                un_seat_list.append({'area_id':"%2d"%cd_area['id'],'area_name':cd_area['name'],'available_num':0})
 
            
 
@@ -220,7 +220,7 @@ def query(time):
     #         floor_now=f['area_name'][0:1]
     #     print('{:>2d} : {} '.format(f['area_id'],f['area_name']))
     
-    return av_seat_list,un_seat_list
+    return av_seat_list,un_seat_list,"剩余空座："
 
 
 
