@@ -15,6 +15,19 @@ import requests
 
 # render_template , 直接会在templates里边找xx.html文件
 
+# 获取图书馆座位信息
+def get_lib_seat():
+    dt, hm = get_time()
+    #查询总的空座信息
+    try:
+        av_seat_list,un_seat_list=query(get_time())
+    except:
+        av_seat_list, un_seat_list,seat_sign= [{'area_name':"当前不可用。。。"}], [{'area_name':"当前不可用。。。"}],''
+    return dt, hm,av_seat_list,un_seat_list,seat_sign
+
+
+
+
 
 
 
@@ -26,14 +39,11 @@ def index():
     weeks,week_i=school_schedule()
 
     dt, hm = get_time()
-    av_seat_list, un_seat_list = [{'area_name': "似乎挂掉了。。。"}], [{'area_name': "似乎挂掉了。。。"}]
 
-    try:
-        av_seat_list,un_seat_list=query(get_time())
-    except:
-        pass
+    # 获取时间和图书馆座位信息
+    dt, hm, av_seat_list, un_seat_list,seat_sign=get_lib_seat()
 
-    return render_template("index.html",weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list)
+    return render_template("index.html",weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
 
 
 
@@ -61,18 +71,19 @@ def post():
     dt, hm = get_time()
     is_today =1
 
+    # 获取当前周数和星期
     weeks,week_i=school_schedule()
     weeks,week_i=str(weeks),str(week_i)
-    available_room=[]
+    available_room=['没有可用的教室，运气爆棚，hahaha!']
 
     # 捕获收到的表单
     dic_form= request.form
+    course_i = request.form.getlist('test[]')
+    bro_agent=request.user_agent
+    print('从%s\n收到的表单为：\n'%bro_agent,dic_form,course_i,'\n')
 
-    cri = request.form.getlist('cri')
-    print('收到的表单为：',dic_form)
-    print('checkbox:',cri)
 
-
+    # 判断是否为今天
     if dic_form['weeks']:
         weeks=dic_form['weeks']
         is_today = 0
@@ -82,7 +93,7 @@ def post():
 
 
 
-    available_room=qury_room(weeks,week_i,dic_form['course_i'])
+    available_room=qury_room(weeks,week_i,course_i)
     # 查询完后时间信息进行处理显示
     if is_today:
          today= '今天'
@@ -92,22 +103,21 @@ def post():
         weeks='第'+weeks+'周'
         week_i='星期'+week_i
 
-    co = "".join((lambda x: (x.sort(), x)[1])(list(dic_form['course_i'])))
+
+
+    co = "".join((lambda x: (x.sort(), x)[1])(course_i))
     course_i='第'
     for i in co:
-        course_i=course_i+str(int(i)*2-1)+str(int(i)*2)+','
+        course_i=course_i+str(int(i)*2-1)+('' if int(i)*2==12 else str(int(i)*2))+','
     course_i=course_i[:-1]+'节课'
 
-
-    dt, hm = get_time()
-    #查询总的空座信息
-    try:
-        av_seat_list,un_seat_list=query(get_time())
-    except:
-        av_seat_list, un_seat_list = [{'area_name':"似乎挂掉了。。。"}], [{'area_name':"似乎挂掉了。。。"}]
+    # 获取时间和图书馆座位信息
+    dt, hm, av_seat_list, un_seat_list,seat_sign=get_lib_seat()
 
 
     return render_template("result.html",dt=dt, hm=hm,weeks=weeks,week_i=week_i,course_i=course_i,today=today, available_room=available_room ,av_seat_list=av_seat_list,un_seat_list=un_seat_list)
+
+
 
 
 
