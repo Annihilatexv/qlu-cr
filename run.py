@@ -34,7 +34,6 @@ def index():
         except:
             pass
 
-
     return render_template("index.html",weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list)
 
 
