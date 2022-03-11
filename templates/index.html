@@ -15,6 +15,18 @@
         }
     </style>
 <!--    <link rel="stylesheet" href="../static/theme/style.css">-->
+
+
+<!--保证复选框至少有一项-->
+ <script src="../static/JavaScript/jquery.min.js"></script>
+
+
+
+
+
+
+</script>
+
 </head>
 
 
@@ -26,11 +38,40 @@
     <form action="/post" METHOD="post">
         <p  style = "text-align:center" ><label for="weeks">周数 </label><input id="weeks" type="text" name="weeks" placeholder="当前是第{{weeks}}周(默认)，可不填"></p>
         <p  style = "text-align:center" ><label for="week_i"> 星期 </label><input id="week_i" type="text" name="week_i" placeholder="现在是星期{{week_i}}(默认)，可不填"></p>
-        <p  style = "text-align:center" ><label for="course_i"> 上课节数 </label><input id="course_i" type="text" name="course_i" placeholder="必填，回车提交 (1-6)" required></p>
-        <p  style = "text-align:center" >例如：12 (代表查询整个上午的空教室), 135, 1234</p>
-        <p  style = "text-align:center"><input  type="submit" value="查询"></p>
+<!--        <p  style = "text-align:center" ><label for="course_i"> 上课节数 </label><input id="course_i" type="text" name="course_i" placeholder="必填，回车提交 (1-6)" required></p>-->
+<!--        <p  style = "text-align:center" >例如：12 (代表查询整个上午的空教室), 135, 1234</p>-->
+
+        <p  style = "text-align:center" >
+            早上:
+            <input type="checkbox" name="test[]" value="1" required>1-2节
+            <input type="checkbox" name="test[]" value="2" required>3-4节
+        </p>
+
+        <p  style = "text-align:center" >
+            下午:
+            <input type="checkbox" name="test[]" value="3" required>5-6节
+            <input type="checkbox" name="test[]" value="4" required>7-8节
+        </p>
+
+        <p  style = "text-align:center" >
+            晚上:
+            <input type="checkbox" name="test[]" value="5" required>9-10节
+            <input type="checkbox" name="test[]" value="6" required>第11节
+        </p>
+
+        <p  style = "text-align:center"><input  type="submit" value="查询" ></p>
     </form>
 
+
+<!--    保证复选框至少有一项-->
+<script>
+ var requiredCheckboxes = $(':checkbox[required]');
+  requiredCheckboxes.on('change', function(e) {undefined
+    var checkboxGroup = requiredCheckboxes.filter('[name="' + $(this).attr('name') + '"]');
+    var isChecked = checkboxGroup.is(':checked');
+    checkboxGroup.prop('required', !isChecked);
+  });
+  </script>
 
 
 
@@ -38,7 +79,7 @@
     <div style="border:1px solid #999;padding:3px; ">
         <h4>以下区域有座</h4>
         {% for area in av_seat_list %}
-        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; 剩余空座：{{area.available_num}}</li>
+        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}} {{area.available_num}}</li>
         {% endfor %}
     </div>
 
@@ -47,7 +88,7 @@
         <h4>以下区域无座</h4>
 
         {% for area in un_seat_list %}
-        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; 剩余空座：{{area.available_num}}</li>
+        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}} {{area.available_num}}</li>
         {% endfor %}
     </div>
 
