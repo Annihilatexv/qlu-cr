@@ -12,6 +12,7 @@ from get_course_on_table import multidict,load_dict
 from get_schedule import school_schedule
 import sys,os
 import requests
+import pandas
 
 # render_template , 直接会在templates里边找xx.html文件
 
@@ -29,7 +30,9 @@ def get_lib_seat():
     return dt, hm,av_seat_list,un_seat_list,seat_sign
 
 
-
+def count_pv(dt,hm):
+    with open("./static/data/pv.csv", "w") as f: # 再存储到文件中
+        f.write(dt+' '+hm)
 
 
 
@@ -42,7 +45,7 @@ def index():
     weeks,week_i=school_schedule()
 
     dt, hm = get_time()
-
+    count_pv(dt, hm)
     # 获取时间和图书馆座位信息
     dt, hm, av_seat_list, un_seat_list,seat_sign=get_lib_seat()
 
