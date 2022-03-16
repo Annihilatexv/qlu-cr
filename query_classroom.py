@@ -12,7 +12,7 @@ import sys,os
 
 
 
-def qury_room(week_now,week_i_now,course_i_now):
+def query_room(week_now,week_i_now,course_i_now):
     all_week = 7
     day_course = 6
     available_room=[]
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     week_now = "2"
     week_i_now = "1"
     course_i_now = "1234"
-    print(qury_room(week_now,week_i_now,course_i_now))
+    print(query_room(week_now,week_i_now,course_i_now))
 
 
 # 操场一
@@ -99,6 +99,6 @@ if __name__ == '__main__':
 # 语言学习七室(实验北楼411)
 # 3号公教楼B606
 
-#print(qury_room(week_now,week_i_now,course_i_now))
+#print(query_room(week_now,week_i_now,course_i_now))
 
 

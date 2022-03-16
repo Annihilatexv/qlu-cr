@@ -7,7 +7,7 @@ from flask import (
 )
 
 from qlu_lib import nowtime,get_time,query
-from qury_classroom import  qury_room
+from query_classroom import  query_room
 from get_course_on_table import multidict,load_dict
 from get_schedule import school_schedule
 import sys,os
@@ -96,7 +96,7 @@ def post():
 
 
 
-    available_room=qury_room(weeks,week_i,course_i)
+    available_room=query_room(weeks,week_i,course_i)
     # 查询完后时间信息进行处理显示
     if is_today:
          today= '今天'
