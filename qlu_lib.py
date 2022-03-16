@@ -204,10 +204,12 @@ def query(time):
     # print('*'*30,'\n以下区域有座：\n','-'*30)
     floor_now=av_seat_list[0]['area_name'][0:1]
 
-    for f in av_seat_list:
-        if floor_now!=f['area_name'][0:1]:
-            print('-'*30)
-            floor_now=f['area_name'][0:1]
+
+# 以下用于控制台打印座位信息
+    # for f in av_seat_list:
+    #     if floor_now!=f['area_name'][0:1]:
+    #         print('-'*30)
+    #         floor_now=f['area_name'][0:1]
         # print('{:>2d} : {} 剩余空座数:{}'.format(f['area_id'],f['area_name'],f['available_num']))
     
 
