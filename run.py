@@ -12,7 +12,7 @@ from get_course_on_table import multidict,load_dict
 from get_schedule import school_schedule
 import sys,os
 import requests
-import pandas
+
 
 # render_template , 直接会在templates里边找xx.html文件
 

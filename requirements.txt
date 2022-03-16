@@ -4,4 +4,3 @@ Flask
 gunicorn
 lxml
 joblib
-csv
