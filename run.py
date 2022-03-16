@@ -83,7 +83,7 @@ def post():
     dic_form= request.form
     course_i = request.form.getlist('test[]')
     bro_agent=request.user_agent
-    print('从%s\n收到的表单为：\n'%bro_agent,dic_form,course_i,'\n')
+    print('%s %s\n从%s\n收到的表单为：\n'%(dt, hm,bro_agent),dic_form,course_i,'\n')
 
 
     # 判断是否为今天
