@@ -19,10 +19,13 @@ import requests
 def get_lib_seat():
     dt, hm = get_time()
     #查询总的空座信息
+
     try:
-        av_seat_list,un_seat_list=query(get_time())
+        av_seat_list,un_seat_list,seat_sign=query(get_time())
     except:
         av_seat_list, un_seat_list,seat_sign= [{'area_name':"当前不可用。。。"}], [{'area_name':"当前不可用。。。"}],''
+
+
     return dt, hm,av_seat_list,un_seat_list,seat_sign
 
 
