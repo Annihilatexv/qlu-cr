@@ -68,15 +68,15 @@ def pretty(available_room_filtered):
     available_room_filtered = sorted(available_room_filtered, key=str.swapcase)
     # available_room = sorted(available_room,key= lambda i:i[0])
 
-    available_room_pretty = ['~~~~~~~~~~~~~~~~~~~~', available_room_filtered[0]]
+    available_room_pretty = ['————————————————', available_room_filtered[0]]
 
     # 美化一下
     for i in range(1, len(available_room_filtered)):
         if available_room_filtered[i][0] != available_room_filtered[i - 1][0]:
-            available_room_pretty.append('~~~~~~~~~~~~~~~~~~~~')
+            available_room_pretty.append('————————————————')
 
         elif "JT" in available_room_filtered[i] and "JT" not in available_room_filtered[i - 1]:
-            available_room_pretty.append('------')
+            available_room_pretty.append('------------------------')
         available_room_pretty.append(available_room_filtered[i])
     return available_room_pretty
 

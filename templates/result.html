@@ -26,8 +26,8 @@
     <div style="border:3px solid #999;padding:3px; ">
         <h3 style = "text-align:center">{{weeks}} {{week_i}}{{today}}<br>{{course_i}}</h3>
         <h4 style = "text-align:center">以下教室可用</h4>
-        {% for room in available_room %}
-        <li>{{room}}</li>
+                        {% for room in available_room %}
+        <li style = "text-align:center">{{room}}</li>
         {% endfor %}
     </div>
 

@@ -132,6 +132,6 @@ def post():
 
 
 if __name__ == '__main__':
-    app.run(debug=True) # 修改代码会立即生效
+    app.run(debug=False) # 修改代码会立即生效
     
 

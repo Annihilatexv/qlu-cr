@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d42a277c-7fb6-47dd-ac30-e130e707132b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_schedule.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_schedule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/query_classroom.py" beforeDir="false" afterPath="$PROJECT_DIR$/query_classroom.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/data/pv.csv" beforeDir="false" afterPath="$PROJECT_DIR$/static/data/pv.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +45,7 @@
       <recent name="D:\Repositories\qlu-cr\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.get_schedule">
+  <component name="RunManager" selected="Python.run">
     <configuration name="get_course_on_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -165,8 +164,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.get_schedule" />
         <item itemvalue="Python.run" />
+        <item itemvalue="Python.get_schedule" />
         <item itemvalue="Python.get_course_on_table" />
         <item itemvalue="Python.query_classroom" />
       </list>
@@ -199,6 +198,7 @@
       <workItem from="1660537386052" duration="1510000" />
       <workItem from="1660539256041" duration="4000" />
       <workItem from="1660539509826" duration="2446000" />
+      <workItem from="1660542220433" duration="786000" />
     </task>
     <servers />
   </component>
@@ -218,10 +218,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/qlu_cr$get_schedule.coverage" NAME="get_schedule Coverage Results" MODIFIED="1660540364272" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/qlu_cr$get_schedule.coverage" NAME="get_schedule Coverage Results" MODIFIED="1660542239022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/qlu_cr$get_course_on_table.coverage" NAME="get_course_on_table Coverage Results" MODIFIED="1660535820737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/qlu_cr$qlu_cr.coverage" NAME="qlu-cr Coverage Results" MODIFIED="1660535492049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/qlu_cr$run.coverage" NAME="run Coverage Results" MODIFIED="1660540123069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/qlu_cr$run.coverage" NAME="run Coverage Results" MODIFIED="1660542243276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/qlu_cr$qury_classroom.coverage" NAME="qury_classroom Coverage Results" MODIFIED="1646748558199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
