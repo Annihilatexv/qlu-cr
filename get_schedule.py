@@ -2,11 +2,13 @@ import datetime
 import time
 import pytz
 
+# <<<<<!!!定义开学时间!!!>>>>>
+year,month,day=2022,8,23
+
+
+
 
 def school_schedule():
-    # 开学时间
-    year,month,day=2022,2,28
-
     now_date,week_i=get_now_date()
 
     d1 = datetime.datetime(now_date[0],now_date[1],now_date[2])
@@ -17,6 +19,9 @@ def school_schedule():
 
     # 获取周几 1-7
     #week_i = datetime.datetime.now().isoweekday()
+
+
+    #week根据差值计算，week_i是实际星期几
     return weeks_now,week_i
 
 

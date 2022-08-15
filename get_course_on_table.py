@@ -7,17 +7,18 @@ import json
 # unhashable type: 'list'
 # 原因是列表是可变的type，而字典中的哈希类型必须是不可变得type，比如元组。
 
+# <<<<<!!!需要使用代理，提供Cookie获取数据!!!>>>>>
+Cookie = "抓取提供"
 
 
 def get_table():
     url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
     # --------可能需要外部变量！
-    Cookie = "Path=/; isPortal=false; TWFID=4eeccb0909c27f11; Path=/; JSESSIONID=3BF1D0382EE11EB0A0C53588F10E34CC"
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4412.0 Safari/537.36 Edg/90.0.796.0',
         'Cookie': Cookie}
     #--------可能需要外部变量！
-    data = {'xnxqh': '2021-2022-2',
+    data = {#'xnxqh': '2021-2022-2',
             'skyx': '',
             'xqid': '1'}
 
@@ -27,6 +28,7 @@ def get_table():
     # result = etree.tostring(html).decode('utf-8')
     # print(result)
 
+    #print(course.text)
     result = html.xpath('//tr')
     # print(result)   #element对象的列表形式，
 
