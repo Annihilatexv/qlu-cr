@@ -9,7 +9,7 @@ from flask import (
 from qlu_lib import nowtime,get_time,query
 from query_classroom import  query_room
 from get_course_on_table import multidict,load_dict
-from get_schedule import school_schedule
+from get_schedule import school_schedule,exam_remain_day
 import sys,os
 import requests
 
@@ -49,7 +49,10 @@ def index():
     # 获取时间和图书馆座位信息
     dt, hm, av_seat_list, un_seat_list,seat_sign=get_lib_seat()
 
-    return render_template("index.html",weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
+    #2023考研倒计时
+    exam_day = exam_remain_day()
+
+    return render_template("index.html",exam_day=exam_day,weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
 
 
 

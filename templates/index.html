@@ -32,10 +32,13 @@
 
 
 <body>
-    <h3 style = "text-align:center" >{{dt}} {{hm}}</h3>
+
+    <h2 style = "text-align:center" >2023考研倒计时：⌛ {{exam_day}}天</h2>
+    <h3 style = "text-align:center" ><font  color="red">‍🎓加油xdm!🎓‍</font></h3>
 
 
-    <h3 style = "text-align:center" >查询空教室</h3>
+
+    <h4 style = "text-align:center" >🈳 教室查询</h4>
     <form action="/post" METHOD="post">
         <p  style = "text-align:center" ><label for="weeks">周数 </label><input id="weeks" type="text" name="weeks" placeholder="当前是第{{weeks}}周(默认)，可不填"></p>
         <p  style = "text-align:center" ><label for="week_i"> 星期 </label><input id="week_i" type="text" name="week_i" placeholder="现在是星期{{week_i}}(默认)，可不填"></p>
@@ -60,7 +63,7 @@
             <input type="checkbox" name="test[]" value="6" required>第11节
         </p>
 
-        <p  style = "text-align:center"><input  type="submit" value="查询" ></p>
+        <p  style = "text-align:center"><input  type="submit" value="查询🔎" ></p>
     </form>
 
 
@@ -75,10 +78,10 @@
   </script>
 
 
-
-    <h3 style = "text-align:center" >当前图书馆座位情况</h3>
+    <h4 style = "text-align:center" >{{dt}} {{hm}}</h4>
+    <h3 style = "text-align:center" >📖 图书馆座位情况</h3>
     <div style="border:1px solid #999;padding:3px; ">
-        <h4>以下区域有座</h4>
+        <h4>以下区域有座 ✅</h4>
         {% for area in av_seat_list %}
         <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}} {{area.available_num}}</li>
         {% endfor %}
@@ -86,7 +89,7 @@
 
 
     <div style="border:1px solid #999;padding:3px; ">
-        <h4>以下区域无座</h4>
+        <h4>以下区域无座 ❌</h4>
 
         {% for area in un_seat_list %}
         <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}} {{area.available_num}}</li>

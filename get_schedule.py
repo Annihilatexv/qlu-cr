@@ -26,6 +26,32 @@ def school_schedule():
 
 
 
+# 获取考研倒计时
+def exam_remain_day():
+
+    exam_day=[2022,12,24]
+
+    now_date,week_i=get_now_date()
+
+    d1 = datetime.datetime(now_date[0],now_date[1],now_date[2])
+    d2 = datetime.datetime(exam_day[0], exam_day[1], exam_day[2])
+
+
+    remain_days=d2-d1
+
+    return remain_days.days
+
+
+
+
+
+
+
+
+
+
+
+
 # 获取东八区日期
 def get_now_date():
     tz = pytz.timezone("Asia/Shanghai")  # 东八区
@@ -39,4 +65,5 @@ def get_now_date():
 
 if __name__ == '__main__':
     print(school_schedule())
+    print("2023考研还有",exam_remain_day(),"天")
 

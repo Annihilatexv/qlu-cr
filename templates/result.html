@@ -22,7 +22,7 @@
 <body>
     <h3 style = "text-align:center" >{{dt}} {{hm}}</h3>
 
-    <h3 style = "text-align:center" >查询结果：</h3>
+    <h3 style = "text-align:center" >🧾 查询结果：</h3>
     <div style="border:3px solid #999;padding:3px; ">
         <h3 style = "text-align:center">{{weeks}} {{week_i}}{{today}}<br>{{course_i}}</h3>
         <h4 style = "text-align:center">以下教室可用</h4>
@@ -31,13 +31,13 @@
         {% endfor %}
     </div>
 
-    <p  style = "text-align:center" ><button onclick="window.location.href='{{ url_for("index") }}'">返回</button></p>
+    <p  style = "text-align:center" ><button onclick="window.location.href='{{ url_for("index") }}'">🔚返回</button></p>
 
 
 
-    <h3 style = "text-align:center" >当前图书馆座位情况</h3>
+    <h3 style = "text-align:center" >📖 图书馆座位情况</h3>
     <div style="border:1px solid #999;padding:3px; ">
-        <h4>以下区域有座</h4>
+        <h4>以下区域有座 ✅</h4>
         {% for area in av_seat_list %}
         <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}} {{area.available_num}}</li>
         {% endfor %}
@@ -45,7 +45,7 @@
 
 
     <div style="border:1px solid #999;padding:3px; ">
-        <h4>以下区域无座</h4>
+        <h4>以下区域无座 ❌</h4>
 
         {% for area in un_seat_list %}
         <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}}：{{area.available_num}}</li>
