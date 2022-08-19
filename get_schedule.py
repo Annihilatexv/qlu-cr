@@ -2,8 +2,8 @@ import datetime
 import time
 import pytz
 
-# <<<<<!!!定义开学时间!!!>>>>>
-year,month,day=2022,8,23
+# <<<<<!!!定义开学那周的周一!!!>>>>>
+year,month,day=2022,8,22
 
 
 

@@ -7,9 +7,9 @@
 - 如果要想要自己测试或更新.
 > 
 只需要如下两步：
-1. 在```get_schedule.py```文件中修改开学时间（开学第一天）
+1. 在```get_schedule.py```文件中修改开学时间（开学那周的周一）
 ```python
-# <<<<<!!!定义开学时间!!!>>>>>
+# <<<<<!!!定义开学那周的周一!!!>>>>>
 year,month,day=2022,8,23
 ```
 2. 在 ```get_course_on_table.py```中提供在 [教务系统](http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn/) 中的cookie，并且运行一次获得数据包
