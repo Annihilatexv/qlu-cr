@@ -12,6 +12,8 @@ Cookie = "抓取提供"
 
 
 def get_table():
+    # 内网使用可用url2
+    url2 = 'http://jwxt.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr'
     url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
     # --------可能需要外部变量！
     headers = {

@@ -12,6 +12,7 @@ from get_course_on_table import multidict,load_dict
 from get_schedule import school_schedule,exam_remain_day
 import sys,os
 import requests
+from gevent import pywsgi
 
 
 # render_template , 直接会在templates里边找xx.html文件
@@ -132,6 +133,7 @@ def post():
 
 
 if __name__ == '__main__':
-    app.run(debug=False) # 修改代码会立即生效
+    server = pywsgi.WSGIServer(('0.0.0.0',5000),app)
+    server.serve_forever()
     
 
