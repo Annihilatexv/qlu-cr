@@ -164,12 +164,19 @@ def get_args(headers):
 
 
 def query(time):
+    url = "http://yuyue.lib.qlu.edu.cn/api.php/areas/1"
+
+    response = requests.request("GET", url)
+    a = response.cookies.items()
+    b = ";".join('='.join(tup) for tup in a)
+
     # 楼层区域 信息
     total_url = "http://yuyue.lib.qlu.edu.cn/api.php/areas/0/date/%s" % time[0]
-
+    
     # 或许在图书馆崩了的时候有所帮助
     try:
-        # 不需要session
+        # 需要session
+        headers["Cookie"] = b
         total_info=requests.get(total_url,headers=headers,timeout=0.8)
     except:
         return [{'area_name': "当前响应过慢，不予访问，减少图书馆压力"}], [{'area_name': "当前响应过慢，不予访问，减少图书馆压力"}],''

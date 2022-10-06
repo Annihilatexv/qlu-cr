@@ -2,3 +2,4 @@
 *.csv
 __pycache__/
 .idea/
+static/data/pv.csv
