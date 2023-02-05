@@ -3,7 +3,7 @@ import time
 import pytz
 
 # <<<<<!!!定义开学那周的周一!!!>>>>>
-year,month,day=2022,8,22
+year,month,day=2023,2,20
 
 
 
@@ -29,7 +29,7 @@ def school_schedule():
 # 获取考研倒计时
 def exam_remain_day():
 
-    exam_day=[2022,12,24]
+    exam_day=[2023,12,24]
 
     now_date,week_i=get_now_date()
 
@@ -65,5 +65,5 @@ def get_now_date():
 
 if __name__ == '__main__':
     print(school_schedule())
-    print("2023考研还有",exam_remain_day(),"天")
+    print("2024考研还有",exam_remain_day(),"天")
 

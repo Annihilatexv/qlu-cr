@@ -15,6 +15,7 @@ def get_table():
     # 内网使用可用url2
     url2 = 'http://jwxt.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr'
     url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
+    url3 = 'http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn:8118/jsxsd/kbcx/kbxx_classroom_ifr'
     # --------可能需要外部变量！
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4412.0 Safari/537.36 Edg/90.0.796.0',
@@ -24,13 +25,13 @@ def get_table():
             'skyx': '',
             'xqid': '1'}
 
-    course = requests.post(url, headers=headers, data=data)
+    course = requests.post(url3, headers=headers, data=data)
 
     html = etree.HTML(course.text)
     # result = etree.tostring(html).decode('utf-8')
     # print(result)
 
-    #print(course.text)
+    # print(course.text)
     result = html.xpath('//tr')
     # print(result)   #element对象的列表形式，
 
