@@ -1,6 +1,6 @@
 # qlu-cr
  查询校内空教室
-> [demo 地址](https://qlu-cr.herokuapp.com/)
+> [demo 地址](https://cr.qlut.repl.co)
 
 能力有限，欢迎issue和pull😊
 
