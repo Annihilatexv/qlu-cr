@@ -133,11 +133,5 @@ def post():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=81,debug=False) # 修改代码会立即生效
-<<<<<<< HEAD
-=======
-    
-
-
->>>>>>> origin/main
 
 
