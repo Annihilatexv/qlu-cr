@@ -1,2 +1,7 @@
 .csv
 *.csv
+pyproject.toml
+__pycache__/
+\.*
+.idea/
+*.lock
