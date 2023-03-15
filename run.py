@@ -24,16 +24,25 @@ app = Flask(__name__)
 @app.route("/")
 def index():
 
+    #获取当前教学周和星期数，并进行html处理
     weeks,week_i=school_schedule(cfg['list']['new_semester'])
+
+    weeks_list = {i: '' for i in range(1, 31) }
+    weeks_list[weeks]= "selected"
+
+    week_i_list=  {i: '' for i in range(1, 8) }
+    week_i_list[week_i]= "selected"
+
+
+
 
     # 获取时间和图书馆座位信息
     dt, hm, av_seat_list, un_seat_list,seat_sign=get_lib_seat()
-
     #2023考研倒计时
     exam_time = exam_remain_day(cfg['list']['exam_day'])
 
     # render_template , 直接会在templates里边找xx.html文件
-    return render_template("index.html",exam_time=exam_time,weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
+    return render_template("index.html",exam_time=exam_time,weeks=weeks_list,week_i=week_i_list,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
 
 @app.route("/get")
 def get():
@@ -61,6 +70,7 @@ def post():
     dic_form= request.form
     course_i = request.form.getlist('test[]')
     bro_agent=request.user_agent
+
     print('%s %s\n从%s\n收到的表单为：\n'%(dt, hm,bro_agent),dic_form,course_i,'\n')
 
 
@@ -72,8 +82,8 @@ def post():
         week_i=dic_form['week_i']
         is_today = 0
 
-
-    available_room=query_room(weeks,week_i,course_i,cfg['list']['ban_list'])
+    district = request.form['district']
+    available_room=query_room(weeks,week_i,course_i,cfg['list']['ban_list_{}'.format(district)],district)
     # 查询完后时间信息进行处理显示
     if is_today:
          today= '今天'

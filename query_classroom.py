@@ -4,17 +4,15 @@ from get_course_on_table import multidict,load_dict
 
 
 # 查找空教室
-def query_room(week_now,week_i_now,course_i_now,ban_list):
+def query_room(week_now,week_i_now,course_i_now,ban_list,district=1):
     all_week = 7
     day_course = 6
     available_room=[]
 
 
     # 加载已保存的课表
-    #course_on_table = joblib.load(r"./static/data/course_on_table.json")
-
-    all_classroom = joblib.load(r'./static/data/all_classroom.pkl')
-    course_on_table = load_dict("./static/data/course_on_table.json")
+    all_classroom = joblib.load(r'./static/data/all_classroom_{}.pkl'.format(district))
+    course_on_table = load_dict("./static/data/course_on_table_{}.json".format(district))
 
     week_now = [i for i in week_now.split()]
     week_i_now = [i for i in week_i_now.split()]
@@ -80,10 +78,7 @@ def pretty(available_room_filtered):
 
 
 if __name__ == '__main__':
-    week_now = "2"
-    week_i_now = "1"
-    course_i_now = "1234"
-    print(query_room(week_now,week_i_now,course_i_now))
+    print(query_room(week_now = "2",week_i_now = "1",ban_list=[],course_i_now = "1234",district=1))
 
 
 # 操场一

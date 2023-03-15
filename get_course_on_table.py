@@ -16,7 +16,7 @@ def load_config():
 
 
 # 获取课表信息
-def get_table(Cookie,table_url):
+def get_table(Cookie,table_url,district):
 
     # --------可能需要外部变量！
     headers = {
@@ -25,7 +25,7 @@ def get_table(Cookie,table_url):
     #--------可能需要外部变量！
     data = {#'xnxqh': '2021-2022-2',
             'skyx': '',
-            'xqid': '1'}
+            'xqid': district}
 
     course = requests.post(table_url, headers=headers, data=data)
     if "用户登录" in course.text:
@@ -190,7 +190,7 @@ class JsonEncoder(json.JSONEncoder):
             return super(MyEncoder, self).default(obj)
 
 # 保存字典
-def save_dict(filename, dic):
+def save_dict(dic,filename):
     with open(filename,'w',encoding='utf-8') as json_file:
         json.dump(dic, json_file, ensure_ascii=False, cls=JsonEncoder)
 
@@ -201,25 +201,31 @@ def load_dict(filename):
     return dic
 
 if __name__ == '__main__':
+    #加载配置
     cfg = load_config()
 
-    table=get_table(cfg['string']['Cookie'],cfg['string']['table_url'])
-    if len(table):
-        print("获取课表完成：", len(table))
-    else:
-        print("用户未登录，请检查 config/config.yaml 中Cookie！")
-        exit()
-    #print(table)
+    district_list={1:"changqing",3:"licheng",4:"heze"}
 
-    course_on_table,all_classroom = get_course_on_table(table)
-    print("处理课表中：", len(course_on_table) ,len(all_classroom))
+    #遍历所有校区
+    for district in district_list:
+        print("<<<<<<<<%s校区>>>>>>>>>"%district_list[district])
+        table=get_table(cfg['string']['Cookie'],cfg['string']['table_url'],district)
+        if len(table):
+            print("获取课表完成：", len(table))
+        else:
+            print("用户未登录，请检查 config/config.yaml 中Cookie！")
+            exit()
+        #print(table)
 
-    # 保存课表字典
-    print("正在保存到文件...")
-    save_dict("./static/data/course_on_table.json",course_on_table)
-    # joblib.dump(course_on_table, './static/data/course_on_table.pkl',compress=3)
-    joblib.dump(all_classroom, r'./static/data/all_classroom.pkl')
-    print("保存成功！")
+        course_on_table,all_classroom = get_course_on_table(table)
+        print("处理教室与课表：",len(course_on_table), '\n所有教室：',all_classroom)
+
+        # 保存课表字典
+        print("正在保存到文件...")
+        save_dict(course_on_table,"./static/data/course_on_table_%d.json"%district)
+        # joblib.dump(course_on_table, './static/data/course_on_table.pkl',compress=3)
+        joblib.dump(all_classroom, r'./static/data/all_classroom_%d.pkl'%district)
+        print("保存成功！")
 
     #print(course_on_table['1号公教楼JT102'][1][1])
     # print(course_on_table[3][1][1]['1号公教楼JT104'])

@@ -26,10 +26,29 @@
 
     <h4 style = "text-align:center" >🈳 教室查询</h4>
     <form action="/post" METHOD="post">
-        <p  style = "text-align:center" ><label for="weeks">周数 </label><input id="weeks" type="text" name="weeks" placeholder="当前是第{{weeks}}周(默认)，可不填"></p>
-        <p  style = "text-align:center" ><label for="week_i"> 星期 </label><input id="week_i" type="text" name="week_i" placeholder="现在是星期{{week_i}}(默认)，可不填"></p>
-<!--        <p  style = "text-align:center" ><label for="course_i"> 上课节数 </label><input id="course_i" type="text" name="course_i" placeholder="必填，回车提交 (1-6)" required></p>-->
-<!--        <p  style = "text-align:center" >例如：12 (代表查询整个上午的空教室), 135, 1234</p>-->
+
+
+<p  style = "text-align:center" >第
+    <select name="weeks" >
+        {% for key, value in weeks.items() %}
+        <option value="{{key}}" {{ value }} > {{key}}</option>
+        {% endfor %}
+    </select>周
+    &nbsp;
+
+    星期
+    <select name="week_i">
+        {% for key, value in week_i.items() %}
+       <option value="{{key}}" {{ value }} > {{key}}</option>
+        {% endfor %}
+    </select>
+</p>
+
+
+
+{#        <p  style = "text-align:center" ><label for="weeks">周数 </label><input id="weeks" type="text" name="weeks" placeholder="当前是第{{weeks}}周(默认)，可不填"></p>#}
+{#        <p  style = "text-align:center" ><label for="week_i"> 星期 </label><input id="week_i" type="text" name="week_i" placeholder="现在是星期{{week_i}}(默认)，可不填"></p>#}
+
 
         <p  style = "text-align:center" >
             早上:
@@ -50,6 +69,13 @@
         </p>
 
         <p  style = "text-align:center"><input  type="submit" value="查询🔎" ></p>
+
+        <p  style = "text-align:center" >
+            <input type="radio" name="district" value="1" checked="checked" required>长清
+            <input type="radio" name="district" value="3" required>历城
+            <input type="radio" name="district" value="4" required>菏泽
+        </p>
+
     </form>
 
 
