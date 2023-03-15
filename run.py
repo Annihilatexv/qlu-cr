@@ -50,9 +50,9 @@ def index():
     dt, hm, av_seat_list, un_seat_list,seat_sign=get_lib_seat()
 
     #2023考研倒计时
-    exam_day = exam_remain_day()
+    exam_time = exam_remain_day()
 
-    return render_template("index.html",exam_day=exam_day,weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
+    return render_template("index.html",exam_time=exam_time,weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
 
 
 

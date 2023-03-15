@@ -2,16 +2,13 @@ import joblib
 from get_course_on_table import multidict,load_dict
 import json
 import sys,os
+
+
+# <<<<<!!! 黑名单教室 !!!>>>>>
+ban_list = ['北楼', '语言', '办公', '3号', '同声', '机房', '同声传译', '实验北楼', '操场', '室','1号公教楼405','1号公教楼305','1号公教楼505','1号公教楼604']
+
+
 # 查找空教室
-
-
-# for i in all_classroom:
-#     print(i)
-
-
-
-
-
 def query_room(week_now,week_i_now,course_i_now):
     all_week = 7
     day_course = 6
@@ -50,7 +47,6 @@ def query_room(week_now,week_i_now,course_i_now):
 
 
     # 处理不能进的空教室
-    ban_list = ['北楼', '语言', '办公', '3号', '同声', '机房', '同声传译', '实验北楼', '操场', '室','1号公教楼405','1号公教楼305','1号公教楼505','1号公教楼604']
     available_room_filtered = []
 
     for room in available_room:

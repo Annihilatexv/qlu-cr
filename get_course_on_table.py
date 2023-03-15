@@ -4,15 +4,23 @@ from lxml import etree
 import joblib
 import json
 
-# unhashable type: 'list'
-# 原因是列表是可变的type，而字典中的哈希类型必须是不可变得type，比如元组。
 
-# <<<<<!!!需要使用代理，提供Cookie获取数据!!!>>>>>
-Cookie = "抓取提供"
+# <<<<<!!! 使用自己的cookie !!!>>>>>
+Cookie = ""
+
+# <<<<<!!!两种方式获取数据，二选其一，注释不用的!!!>>>>>
+
+# 1. 使用校园网（推荐）
+table_url="http://jwxt.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
+# 2. 使用校外VPN（不推荐，url会随时改变，届时需要自己抓取替换前部域名）
+#table_url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn:8118/jsxsd/kbcx/kbxx_classroom_ifr"
 
 
+
+
+# 获取课表信息
 def get_table():
-    url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
+
     # --------可能需要外部变量！
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4412.0 Safari/537.36 Edg/90.0.796.0',
@@ -22,7 +30,7 @@ def get_table():
             'skyx': '',
             'xqid': '1'}
 
-    course = requests.post(url, headers=headers, data=data)
+    course = requests.post(table_url, headers=headers, data=data)
 
     html = etree.HTML(course.text)
     # result = etree.tostring(html).decode('utf-8')
@@ -54,7 +62,7 @@ def get_table():
 
 
 
-
+# 处理有课表，和教室表
 def get_course_on_table(table):
     course_on_table = multidict()
     all_week = 7
@@ -128,6 +136,7 @@ def cell_parse(cell):
     return course_name_ls, tcher_name_ls, week_on, class_name_ls
 
 
+# 进行周数的字符串解析
 def week_name_parse(week_name, cell):
     # (1-16周), (5,12周),(1-8,10-17双周),(1-10单周),(2,4,6,8,10,14,16,18双周)
 
@@ -205,14 +214,27 @@ def load_dict(filename):
 
 if __name__ == '__main__':
     table=get_table()
+    print("获取课表完成：", len(table))
+    #print(table)
+
+
     course_on_table,all_classroom = get_course_on_table(table)
+    print("处理课表中：", len(course_on_table) ,len(all_classroom))
+
+
     # 保存课表字典
+    print("正在保存到文件...")
     save_dict("./static/data/course_on_table.json",course_on_table)
     # joblib.dump(course_on_table, './static/data/course_on_table.pkl',compress=3)
     joblib.dump(all_classroom, r'./static/data/all_classroom.pkl')
+    print("保存成功！")
 
     # print(course_on_table['1号公教楼JT102'][1][1])
 
     # print(course_on_table[3][1][1]['1号公教楼JT104'])
     # print(course_on_table.keys())
 
+
+
+# unhashable type: 'list'
+# 原因是列表是可变的type，而字典中的哈希类型必须是不可变得type，比如元组。
