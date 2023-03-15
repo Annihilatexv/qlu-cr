@@ -3,36 +3,22 @@
 
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.5, user-scalable=yes">
-
-    <link rel="shortcut icon" href="./static/img//QLUT.ico"/>
-    <link rel="bookmark" href="./static/img//QLUT.ico"/>
-
+    <!--保证复选框至少有一项-->
+    <script src="./static/JavaScript/jquery.min.js"></script>
 
     <title>齐鲁工业大学 空教室查询</title>
-        <style>
+    <style>
         body {
             width: 380px;
             margin: 0 auto;
         }
     </style>
-<!--    <link rel="stylesheet" href="../static/theme/style.css">-->
-
-
-<!--保证复选框至少有一项-->
- <script src="./static/JavaScript/jquery.min.js"></script>
-
-
-
-
-
-
-</script>
-
 </head>
 
 
-<body>
 
+
+<body>
     <h2 style = "text-align:center" >{{exam_time[0]}}考研倒计时：⌛ {{exam_time[1]}}天</h2>
     <h3 style = "text-align:center" ><font  color="red">‍🎓加油xdm!🎓‍</font></h3>
 
@@ -67,6 +53,8 @@
     </form>
 
 
+
+
 <!--    保证复选框至少有一项-->
 <script>
  var requiredCheckboxes = $(':checkbox[required]');
@@ -75,16 +63,18 @@
     var isChecked = checkboxGroup.is(':checked');
     checkboxGroup.prop('required', !isChecked);
   });
-  </script>
+</script>
 
 
     <h4 style = "text-align:center" >{{dt}} {{hm}}</h4>
     <h3 style = "text-align:center" >📖 图书馆座位情况</h3>
+
     <div style="border:1px solid #999;padding:3px; ">
         <h4>以下区域有座 ✅</h4>
         {% for area in av_seat_list %}
         <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}} {{area.available_num}}</li>
         {% endfor %}
+    <div class="bar" style="--precent:93;">起床</div>
     </div>
 
 
@@ -107,6 +97,7 @@
     <h3>GET请求</h3>
     <p><a href="/get ">get</a></p>
     -->
+
 </body>
 
 

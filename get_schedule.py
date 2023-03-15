@@ -1,15 +1,18 @@
 import datetime
 import time
 import pytz
+# from qlu_lib import load_config
 
-# <<<<<!!!定义开学那周的周一!!!>>>>>
-new_semester=[2023,2,20]
-# <<<<<!!!考研时间!!!>>>>>
-exam_day=[2023,12,23]
+
+# cfg=load_config()
+# # <<<<<!!!定义开学那周的周一!!!>>>>>
+# new_semester=cfg['list']['new_semester']
+# # <<<<<!!!考研时间!!!>>>>>
+# exam_day==cfg['list']['exam_day']
 
 
 #获取当前教学周和星期数
-def school_schedule():
+def school_schedule(new_semester):
     now_date,week_i=get_now_date()
 
     d1 = datetime.datetime(now_date[0],now_date[1],now_date[2])
@@ -24,10 +27,8 @@ def school_schedule():
     #week根据差值计算，week_i是实际星期几
     return weeks_now,week_i
 
-
-
 # 获取考研倒计时
-def exam_remain_day():
+def exam_remain_day(exam_day):
     now_date,week_i=get_now_date()
 
     d1 = datetime.datetime(now_date[0],now_date[1],now_date[2])

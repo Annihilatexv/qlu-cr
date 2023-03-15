@@ -1,4 +1,3 @@
-
 from flask import (
     Flask,
     render_template,
@@ -6,35 +5,18 @@ from flask import (
     jsonify,
 )
 
-from qlu_lib import nowtime,get_time,query
+from qlu_lib import get_time,get_lib_seat
 from query_classroom import  query_room
-from get_course_on_table import multidict,load_dict
 from get_schedule import school_schedule,exam_remain_day
-import sys,os
-import requests
+import yaml
 
-
-# render_template , 直接会在templates里边找xx.html文件
-
-# 获取图书馆座位信息
-def get_lib_seat():
-    dt, hm = get_time()
-    #查询总的空座信息
-
-    try:
-        av_seat_list,un_seat_list,seat_sign=query(get_time())
-    except:
-        av_seat_list, un_seat_list,seat_sign= [{'area_name':"当前不可用。。。"}], [{'area_name':"当前不可用。。。"}],''
-
-
-    return dt, hm,av_seat_list,un_seat_list,seat_sign
-
-
-def count_pv(dt,hm):
-    with open("./static/data/pv.csv", "w") as f: # 再存储到文件中
-        f.write(dt+' '+hm)
-
-
+# 加载配置文件（无地安放2333）
+def load_config():
+    yaml_file = "config/config.yaml"
+    with open(yaml_file, 'r',encoding='utf-8' ) as f:
+        cfg = yaml.safe_load(f)
+    return cfg
+cfg = load_config()
 
 
 app = Flask(__name__)
@@ -42,21 +24,16 @@ app = Flask(__name__)
 @app.route("/")
 def index():
 
-    weeks,week_i=school_schedule()
+    weeks,week_i=school_schedule(cfg['list']['new_semester'])
 
-    dt, hm = get_time()
-    count_pv(dt, hm)
     # 获取时间和图书馆座位信息
     dt, hm, av_seat_list, un_seat_list,seat_sign=get_lib_seat()
 
     #2023考研倒计时
-    exam_time = exam_remain_day()
+    exam_time = exam_remain_day(cfg['list']['exam_day'])
 
+    # render_template , 直接会在templates里边找xx.html文件
     return render_template("index.html",exam_time=exam_time,weeks=weeks,week_i=week_i,dt=dt,hm=hm ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
-
-
-
-
 
 @app.route("/get")
 def get():
@@ -68,11 +45,6 @@ def get():
     #data["remote_addr"] = request.remote_addr
 
     return render_template("index.html")
-    
-
-
-
-
 
 
 @app.route("/post", methods=["POST"])
@@ -81,9 +53,9 @@ def post():
     is_today =1
 
     # 获取当前周数和星期
-    weeks,week_i=school_schedule()
+    weeks,week_i=school_schedule(cfg['list']['new_semester'])
     weeks,week_i=str(weeks),str(week_i)
-    available_room=['没有可用的教室，运气爆棚，hahaha!']
+
 
     # 捕获收到的表单
     dic_form= request.form
@@ -101,8 +73,7 @@ def post():
         is_today = 0
 
 
-
-    available_room=query_room(weeks,week_i,course_i)
+    available_room=query_room(weeks,week_i,course_i,cfg['list']['ban_list'])
     # 查询完后时间信息进行处理显示
     if is_today:
          today= '今天'
@@ -127,11 +98,8 @@ def post():
     return render_template("result.html",dt=dt, hm=hm,weeks=weeks,week_i=week_i,course_i=course_i,today=today, available_room=available_room ,av_seat_list=av_seat_list,un_seat_list=un_seat_list,seat_sign=seat_sign)
 
 
-
-
-
-
 if __name__ == '__main__':
-    app.run(debug=False) # 修改代码会立即生效
+
+    app.run(debug=True) # 修改代码会立即生效
     
 

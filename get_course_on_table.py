@@ -1,25 +1,22 @@
 import requests
 from lxml import etree
-#from bs4 import BeautifulSoup
 import joblib
 import json
+import yaml
 
 
-# <<<<<!!! 使用自己的cookie !!!>>>>>
-Cookie = ""
-
-# <<<<<!!!两种方式获取数据，二选其一，注释不用的!!!>>>>>
-
-# 1. 使用校园网（推荐）
-table_url="http://jwxt.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
-# 2. 使用校外VPN（不推荐，url会随时改变，届时需要自己抓取替换前部域名）
-#table_url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn:8118/jsxsd/kbcx/kbxx_classroom_ifr"
+# 加载配置文件
+def load_config():
+    yaml_file = "config/config.yaml"
+    with open(yaml_file, 'r',encoding='utf-8' ) as f:
+        cfg = yaml.safe_load(f)
+    return cfg
 
 
 
 
 # 获取课表信息
-def get_table():
+def get_table(Cookie,table_url):
 
     # --------可能需要外部变量！
     headers = {
@@ -31,12 +28,10 @@ def get_table():
             'xqid': '1'}
 
     course = requests.post(table_url, headers=headers, data=data)
+    if "用户登录" in course.text:
+        return []
 
     html = etree.HTML(course.text)
-    # result = etree.tostring(html).decode('utf-8')
-    # print(result)
-
-    #print(course.text)
     result = html.xpath('//tr')
     # print(result)   #element对象的列表形式，
 
@@ -58,9 +53,6 @@ def get_table():
 
     # print(table[0])
     return table
-
-
-
 
 # 处理有课表，和教室表
 def get_course_on_table(table):
@@ -114,7 +106,6 @@ def get_course_on_table(table):
 
     return course_on_table,all_classroom
 
-
 def cell_parse(cell):
     # 保存每个cell中有课的周数
     week_on = []
@@ -134,7 +125,6 @@ def cell_parse(cell):
     #         print(week_name_parse(week_name))
     #        print(week_on)
     return course_name_ls, tcher_name_ls, week_on, class_name_ls
-
 
 # 进行周数的字符串解析
 def week_name_parse(week_name, cell):
@@ -175,7 +165,6 @@ def week_name_parse(week_name, cell):
                 print('该单元可能有问题：', week_name, each_num, cell, sep='\n')
     return week_on
 
-
 # 定义一个多层字典类
 class multidict(dict):
     def __getitem__(self, item):
@@ -200,7 +189,6 @@ class JsonEncoder(json.JSONEncoder):
         else:
             return super(MyEncoder, self).default(obj)
 
-
 # 保存字典
 def save_dict(filename, dic):
     with open(filename,'w',encoding='utf-8') as json_file:
@@ -213,14 +201,18 @@ def load_dict(filename):
     return dic
 
 if __name__ == '__main__':
-    table=get_table()
-    print("获取课表完成：", len(table))
-    #print(table)
+    cfg = load_config()
 
+    table=get_table(cfg['string']['Cookie'],cfg['string']['table_url'])
+    if len(table):
+        print("获取课表完成：", len(table))
+    else:
+        print("用户未登录，请检查 config/config.yaml 中Cookie！")
+        exit()
+    #print(table)
 
     course_on_table,all_classroom = get_course_on_table(table)
     print("处理课表中：", len(course_on_table) ,len(all_classroom))
-
 
     # 保存课表字典
     print("正在保存到文件...")
@@ -229,11 +221,9 @@ if __name__ == '__main__':
     joblib.dump(all_classroom, r'./static/data/all_classroom.pkl')
     print("保存成功！")
 
-    # print(course_on_table['1号公教楼JT102'][1][1])
-
+    #print(course_on_table['1号公教楼JT102'][1][1])
     # print(course_on_table[3][1][1]['1号公教楼JT104'])
-    # print(course_on_table.keys())
-
+    #print(course_on_table.keys())
 
 
 # unhashable type: 'list'

@@ -4,7 +4,7 @@ import time
 import pytz
 import datetime
 import random
-import os
+
 
 
 headers = {
@@ -13,6 +13,10 @@ headers = {
 }
 
 
+
+
+
+#格式化打印json信息
 def print_js(js):
     print(json.dumps(js, sort_keys=True, indent=4, separators=(',', ':'), ensure_ascii=False))
 
@@ -26,9 +30,6 @@ def save_code(img_url,code_id,session=None):
     # img.show()
     with open('./static/code/code%d.png'%code_id,'wb') as f:
         f.write(img_response.content)
-
-
-
 
 # 传入登录成功的session 返回验证码的路径
 def get_code(session, headers): 
@@ -54,9 +55,6 @@ def get_code(session, headers):
     save_code(check_url,code_id,session)
 
     return code_path
-
-
-
 
 def login(session, headers, check_code):
     login_url = "http://yuyue.lib.qlu.edu.cn/api.php/login"
@@ -154,10 +152,6 @@ def get_args(headers):
     stu_info=login_info.json()['data']['list']
     print('{}的{}生\n{}，你好！'.format(stu_info['deptName'],stu_info['roleName'],stu_info['name']))
 
-
-
-
-
 def query(time):
     # 楼层区域 信息
     total_url = "http://yuyue.lib.qlu.edu.cn/api.php/areas/0/date/%s" % time[0]
@@ -219,17 +213,12 @@ def query(time):
     
     return av_seat_list,un_seat_list,"剩余空座："
 
-
-
 def get_segment(headers,area_id,dt):
     html=requests.get('http://yuyue.lib.qlu.edu.cn/api.php/areadays/%d'%area_id,headers=headers)
     area_date_list=html.json()['data']['list']
     for area_date in area_date_list:
         if area_date['day']==dt:
             return area_date['id']
-
-
-
 
 def book_seat(session,headers,seat_id,userid,access_token,segment):
     book_url='http://yuyue.lib.qlu.edu.cn/api.php/spaces/%d/book'%seat_id
@@ -242,26 +231,6 @@ def book_seat(session,headers,seat_id,userid,access_token,segment):
     #print('book_url',book_url)
     book_info=session.post(book_url,headers=headers,data=data)
     return book_info
-
-
-
-
-
-
-def nowtime():
-    # 报个时
-    dt,hm=get_time()
-    #print('当前日期:',dt,'\n当前时间:',hm)
-    return dt,hm
-
-
-
-
-
-
-
-
-
 
 def book_in(session,area_id_list,userid,access_token,headers,addday=0):
 
@@ -299,5 +268,16 @@ def book_in(session,area_id_list,userid,access_token,headers,addday=0):
     # 所选区域没有位置 
     else:
         return "当前没有余座，继续检测"
-
     
+# 获取图书馆座位信息
+def get_lib_seat():
+    dt, hm = get_time()
+    #查询总的空座信息
+
+    try:
+        av_seat_list,un_seat_list,seat_sign=query(get_time())
+    except:
+        av_seat_list, un_seat_list,seat_sign= [{'area_name':"当前不可用。。。"}], [{'area_name':"当前不可用。。。"}],''
+
+
+    return dt, hm,av_seat_list,un_seat_list,seat_sign

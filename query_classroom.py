@@ -1,15 +1,10 @@
 import joblib
 from get_course_on_table import multidict,load_dict
-import json
-import sys,os
 
-
-# <<<<<!!! 黑名单教室 !!!>>>>>
-ban_list = ['北楼', '语言', '办公', '3号', '同声', '机房', '同声传译', '实验北楼', '操场', '室','1号公教楼405','1号公教楼305','1号公教楼505','1号公教楼604']
 
 
 # 查找空教室
-def query_room(week_now,week_i_now,course_i_now):
+def query_room(week_now,week_i_now,course_i_now,ban_list):
     all_week = 7
     day_course = 6
     available_room=[]
@@ -56,10 +51,16 @@ def query_room(week_now,week_i_now,course_i_now):
         else:
             available_room_filtered.append(room)
 
-    available_room_pretty=pretty(available_room_filtered)
+    # 过滤后是否有可用教室
+    if available_room_filtered:
+        available_room_pretty = pretty(available_room_filtered)
+    else:
+        available_room_pretty=['运气爆棚！没有可用的教室，hahaha!']
 
     return available_room_pretty
 
+
+# 美化空教室输出（maybe）
 def pretty(available_room_filtered):
     available_room_filtered = sorted(available_room_filtered, key=str.swapcase)
     # available_room = sorted(available_room,key= lambda i:i[0])

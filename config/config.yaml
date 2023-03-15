@@ -1,0 +1,20 @@
+string :
+  #使用自己的cookie
+  Cookie : "Path=/; JSESSIONID=xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  #### 有两种方式获取数据，二选其一
+
+  # 1. 直连（推荐，需要在校园网局域网环境下）
+  table_url : "http://jwxt.qlu.edu.cn/jsxsd/kbcx/kbxx_classroom_ifr"
+
+  # 2. 使用VPN代理（不推荐，url可能会发生改变，届时需要自己抓取并替换前半域名）
+  #table_url = "http://jwxt-qlu-edu-cn.vpn.qlu.edu.cn:8118/jsxsd/kbcx/kbxx_classroom_ifr"
+
+
+list:
+  # 开学那周的周一
+  new_semester: [2023,2,20]
+  # 考研时间
+  exam_day: [2023,12,23]
+  # 教室黑名单，根据关键字进行排除
+  ban_list : ['北楼', '语言', '办公', '3号', '同声', '机房', '同声传译', '实验北楼', '操场', '室','1号公教楼405','1号公教楼305','1号公教楼505','1号公教楼604']
+
