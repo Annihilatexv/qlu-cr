@@ -178,9 +178,10 @@ def query(time):
             # is_available其实可以不要了,因为已经排除 None 了 
             if is_available([cd_area['TotalCount'],cd_area['UnavailableSpace']]): #证明这里有座位
                 available_num=int(cd_area['TotalCount'])-int(cd_area['UnavailableSpace'])
-                av_seat_list.append({'area_id':"%02d"%cd_area['id'],'area_name':cd_area['name'].ljust(30),'available_num':available_num})
+                available_percent='{:.2%}'.format(available_num/int(cd_area['TotalCount']))
+                av_seat_list.append({'area_id':"%02d"%cd_area['id'],'area_name':cd_area['name'],'available_num':available_num,'available_percent':available_percent})
             else:
-                un_seat_list.append({'area_id':"%02d"%cd_area['id'],'area_name':cd_area['name'],'available_num':0})
+                un_seat_list.append({'area_id':"%02d"%cd_area['id'],'area_name':cd_area['name'],'available_num':0,'available_percent':'0%'})
 
            
 

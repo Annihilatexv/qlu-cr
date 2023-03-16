@@ -1,8 +1,7 @@
 from flask import (
     Flask,
     render_template,
-    request,
-    jsonify,
+    request
 )
 
 from qlu_lib import get_time,get_lib_seat
@@ -110,6 +109,6 @@ def post():
 
 if __name__ == '__main__':
 
-    app.run(debug=True) # 修改代码会立即生效
+    app.run(host='0.0.0.0', port=81,debug=False) # 修改代码会立即生效
     
 

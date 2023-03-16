@@ -2,9 +2,25 @@
  查询校内空教室
 > [demo 地址](https://cr.qlut.repl.co)
 
+
 能力有限，欢迎issue和pull😊
 
 如果对你有帮助的话，请帮忙star⭐一下
+
+### Preview
+
+
+<center>
+	<img src="https://i.328888.xyz/2023/03/16/KmuCZ.png" width="60%" align="top"/>
+	&emsp;
+	<img src="https://i.328888.xyz/2023/03/16/Kp86z.png" width="12.8%" />
+
+</center>
+
+
+
+
+
 
 ## 开发
 如果要想要自己测试或更新
