@@ -1,0 +1,119 @@
+<!-- 两张 图书馆卡片 -->
+<!-- 所需参数：av_seat_list，un_seat_list -->
+<div class="container ">
+
+    <div class="row">
+
+        <div class="col-md-7 col-sm-12   pt-3">
+            <div class="card rounded-4 border-0 shadow  ">
+                <div class="card-body" style="position: relative;">
+                    <!-- <div class="card modal-content rounded-4 shadow text-center "></div> -->
+
+                    <h4 class="card-title ">✅有座区域 </h4>
+                    <p class="card-description ">
+                        📖图书馆
+                    </p>
+                    <div class="table-responsive ">
+                        <table class="table table-vcenter ">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        区域
+                                    </th>
+                                    <th colspan="2">
+                                        余量
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for area in av_seat_list %}
+                                <tr>
+                                    <td>
+                                        {{area.area_id}}
+                                    </td>
+                                    <td>
+                                        {{area.area_name}}
+                                    </td>
+                                    <td class="w-50">
+                                        <div class="progress ">
+                                            <div class="progress-bar bg-success " role="progressbar " style="width: {{area.available_percent}} " aria-valuenow="25 " aria-valuemin="0 " aria-valuemax="100 "></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{area.available_num}}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5 col-sm-12   pt-3 ">
+            <div class="card rounded-4 border-0 shadow ">
+                <div class="card-body" style="position: relative;">
+
+                    <h4 class="card-title ">❌无座区域 </h4>
+                    <p class="card-description ">
+                        📖图书馆
+                    </p>
+                    <div class="table-responsive ">
+                        <table class="table table-vcenter ">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        区域
+                                    </th>
+                                    <th colspan="2">
+                                        余量
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for area in un_seat_list %}
+                                <tr>
+                                    <td>
+                                        {{area.area_id}}
+                                    </td>
+                                    <td style="text-align: left; ">
+                                        {{area.area_name}}
+                                    </td>
+                                    <td class="w-50">
+                                        <div class="progress ">
+                                            <div class="progress-bar bg-success " role="progressbar " style="width: {{area.available_percent}} " aria-valuenow="25 " aria-valuemin="0 " aria-valuemax="100 "></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{area.available_num}}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

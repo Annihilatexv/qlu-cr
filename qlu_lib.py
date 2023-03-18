@@ -161,7 +161,7 @@ def query(time):
         # 不需要session
         total_info=requests.get(total_url,headers=headers,timeout=0.8)
     except:
-        return [{'area_name': "当前响应过慢，不予访问，减少图书馆压力"}], [{'area_name': "当前响应过慢，不予访问，减少图书馆压力"}],''
+        return [{'area_name': "当前响应过慢，不予访问"}], [{'area_name': "当前响应过慢，不予访问"}],''
 
     # 判断是否访问成功
     if total_info.status_code != 200:
@@ -212,7 +212,7 @@ def query(time):
     #         floor_now=f['area_name'][0:1]
     #     print('{:>2d} : {} '.format(f['area_id'],f['area_name']))
     
-    return av_seat_list,un_seat_list,"剩余空座："
+    return av_seat_list,un_seat_list
 
 def get_segment(headers,area_id,dt):
     html=requests.get('http://yuyue.lib.qlu.edu.cn/api.php/areadays/%d'%area_id,headers=headers)
@@ -276,9 +276,9 @@ def get_lib_seat():
     #查询总的空座信息
 
     try:
-        av_seat_list,un_seat_list,seat_sign=query(get_time())
+        av_seat_list,un_seat_list=query(get_time())
     except:
-        av_seat_list, un_seat_list,seat_sign= [{'area_name':"当前不可用。。。"}], [{'area_name':"当前不可用。。。"}],''
+        av_seat_list, un_seat_list= [{'area_name':"当前不可用。。。"}], [{'area_name':"当前不可用。。。"}],''
 
 
-    return dt, hm,av_seat_list,un_seat_list,seat_sign
+    return dt, hm,av_seat_list,un_seat_list

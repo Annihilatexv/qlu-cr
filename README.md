@@ -3,30 +3,28 @@
 > [demo 地址](https://cr.qlut.repl.co)
 
 
-能力有限，欢迎issue和pull😊
-
-如果对你有帮助的话，请帮忙star⭐一下
+能力有限，欢迎issue和pull😊，如果对你有帮助的话，请帮忙star⭐一下
 
 ### Preview
 
 
-<center>
-	<img src="https://i.328888.xyz/2023/03/16/KmuCZ.png" width="60%" align="top"/>
-	&emsp;
-	<img src="https://i.328888.xyz/2023/03/16/Kp86z.png" width="12.8%" />
-
-</center>
+![Preview.png](https://i.328888.xyz/2023/03/18/MkKKJ.png)
 
 
-
-
+## 友链
+- [nixiak](https://qlu.nixiak.xyz)
 
 
 ## 开发
+**请勿部署或添加至任何商业项目中！**如果你部署了本项目，愿意给其他人**免费使用**，欢迎在仓库内留言添加友链！（或者发邮件至Annihilatexv@outlook.com）
+
+
+
 如果要想要自己测试或更新
 1. 配置 ```config/config.yaml``` 文件。
 2. 运行一次```get_course_on_table.py```文件，来获取最新的课表数据。
 3. 运行本项目。
+4. 强烈建议创建定时任务，运行```get_course_on_table.py```定期更新课表数据
 
 
 ```yaml

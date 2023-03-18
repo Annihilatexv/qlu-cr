@@ -1,69 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.5, user-scalable=yes">
-
-    <link rel="shortcut icon" href="./static/img//QLUT.ico"/>
-    <link rel="bookmark" href="./static/img//QLUT.ico"/>
+{% extends 'base.html' %} {% block title %} 齐鲁工业大学 空教室查询 {% endblock %} {% block content %}
 
 
-    <title>齐鲁工业大学 空教室查询</title>
-    <style>
-        body {
-            width: 380px;
-            margin: 0 auto;
-        }
-    </style>
-<!--    <link rel="stylesheet" href="../static/theme/style.css">-->
-</head>
+<div class="container pt-3">
+
+    <!-- <div class="card rounded-4 border-0 shadow  pt-3 text-center"> -->
+    <div class="card rounded-4 border-0 shadow text-center ">
+        <div class="card-body" style="position: relative;">
+            <h3 class="card-title border-bottom pb-2 mb-0">🧾 查询结果</h3>
+            <!-- <p class="card-description text-success">
+                {{checked_date}}&nbsp;{{course_i}}
+            </p> -->
 
 
-<body>
-    <h3 style = "text-align:center" >{{dt}} {{hm}}</h3>
+            <!-- <h3 style="text-align:center"></h3> -->
 
-    <h3 style = "text-align:center" >🧾 查询结果：</h3>
-    <div style="border:3px solid #999;padding:3px; ">
-        <h3 style = "text-align:center">{{weeks}} {{week_i}}{{today}}<br>{{course_i}}</h3>
-        <h4 style = "text-align:center">以下教室可用</h4>
+
+            <!-- 以下教室可用 -->
+            <div class="table-responsive pt-3">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <p class="text-success">{{checked_date}}&nbsp;{{course_info}}</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {% for room in available_room %}
-        <li style = "text-align:center">{{room}}</li>
-        {% endfor %}
+                        <tr>
+                            <td>{{room}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!--返回 -->
+            <div class="pt-3">
+                <button type="submit" class="btn btn-success mb-3" onclick="window.location.href='{{ url_for('index') }}'">🔚返回</button>
+            </div>
+
+
+        </div>
     </div>
 
-    <p  style = "text-align:center" ><button onclick="window.location.href='{{ url_for("index") }}'">🔚返回</button></p>
+</div>
 
 
 
-    <h3 style = "text-align:center" >📖 图书馆座位情况</h3>
-    <div style="border:1px solid #999;padding:3px; ">
-        <h4>以下区域有座 ✅</h4>
-        {% for area in av_seat_list %}
-        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}} {{area.available_num}}</li>
-        {% endfor %}
-    </div>
 
 
-    <div style="border:1px solid #999;padding:3px; ">
-        <h4>以下区域无座 ❌</h4>
-
-        {% for area in un_seat_list %}
-        <li>{{area.area_id}} &nbsp;: {{area.area_name}}&nbsp;&nbsp; {{seat_sign}}：{{area.available_num}}</li>
-        {% endfor %}
-    </div>
 
 
-    <div align="center">
-        <a href="https://github.com/Annihilatexv/qlu-cr">
-            <img src="./static/img/github.png" alt="github.png" border="0" width="50" height="50" align="middle" />
-        </a>
-    </div>
-    <!-- get示例  -->
-    <!--
-    <h3>GET请求</h3>
-    <p><a href="/get ">get</a></p>
-    -->
-</body>
 
 
-</html>
+
+
+
+
+{% include 'library.html'%}{% include 'footer.html'%} {% endblock %}

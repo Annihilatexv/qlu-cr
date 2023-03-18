@@ -1,0 +1,189 @@
+<!-- 教室查询卡片 -->
+<!-- 所需参数：weeks， week_i-->
+
+
+
+<div class="container pt-3">
+
+    <form action="/post" METHOD="post">
+        <!-- <div class="card rounded-4 border-0 shadow  pt-3 text-center"> -->
+        <div class="card rounded-4 border-0 shadow text-center ">
+            <div class="card-body" style="position: relative;">
+
+                <h3 class="card-title border-bottom pb-2 mb-0">🈳教室查询</h3>
+
+                <div class="row pt-3 ">
+
+                    <div class="col-md-3  offset-md-3 pt-2">
+                        <div class="row pt-3">
+                            <div class="col-4 col-md-6 offset-2 offset-md-6 ">
+                                <label for="weeks" class="form-label">教学周</label>
+                                <select name="weeks" class="form-select " required="">
+                                        {% for key, value in weeks.items() %}
+                                        <option value="{{key}}" {{ value }}> {{key}}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+                            <div class="col-4 col-md-6 offset-md-6 ">
+                                <label for="week_i" class="form-label">星期</label>
+                                <select name="week_i" class="form-select" required="">
+                                        {% for key, value in week_i.items() %}
+                                        <option value="{{key}}" {{ value }}> {{key}}</option>
+                                        {% endfor %}
+                                    </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-3 ">
+                        <!-- 早上 -->
+
+                        <div class=" row pt-3">
+                            <div class=" col-md-2 col-2 offset-md-1 ">
+                                <i class="bi bi-brightness-alt-high-fill" style="font-size: 2rem; color: rgb(255,94,89);"></i>
+                            </div>
+
+                            <div class=" col-md-4 col-4">
+                                <div class="btn-group" role="group" aria-label="moorning button group">
+                                    <input type="checkbox" class="btn-check" id="btncheck1" name="course_i[]" value="1" autocomplete="off" required>
+                                    <label class="btn btn-outline-success" for="btncheck1">1-2节</label>
+                                </div>
+                            </div>
+                            <div class=" col-md-4 col-4">
+                                <div class="btn-group" role="group" aria-label="moorning button group">
+                                    <input type="checkbox" class="btn-check" id="btncheck2" name="course_i[]" value="2" autocomplete="off" required>
+                                    <label class="btn btn-outline-success" for="btncheck2">3-4节</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- 下午 -->
+                        <div class="row pt-3">
+                            <div class=" col-md-2 col-2 offset-md-1 ">
+                                <i class="bi bi-brightness-high-fill" style="font-size: 2rem; color: rgb(255,130,45);"></i>
+                            </div>
+                            <div class=" col-md-4 col-4">
+                                <div class="btn-group" role="group" aria-label="afternooon button group">
+                                    <input type="checkbox" class="btn-check" id="btncheck3" name="course_i[]" value="3" autocomplete="off" required>
+                                    <label class="btn btn-outline-success" for="btncheck3">5-6节</label>
+                                </div>
+                            </div>
+
+
+                            <div class=" col-md-4 col-4">
+                                <div class="btn-group" role="group" aria-label="moorning button group">
+                                    <input type="checkbox" class="btn-check" id="btncheck4" name="course_i[]" value="4" autocomplete="off" required>
+                                    <label class="btn btn-outline-success" for="btncheck4">7-8节</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- 晚上 -->
+
+                        <div class="row pt-3">
+                            <div class=" col-md-2 col-2 offset-md-1 ">
+                                <i class="bi bi-moon-stars-fill" style="font-size: 1.5rem; color: rgb(252,213,63);"></i>
+                            </div>
+
+                            <div class="col-md-4 col-4">
+                                <div class="btn-group" role="group" aria-label="night button group">
+                                    <input type="checkbox" class="btn-check" id="btncheck5" name="course_i[]" value="5" autocomplete="off" required>
+                                    <label class="btn btn-outline-success" for="btncheck5">9-10节</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-4">
+                                <div class="btn-group" role="group" aria-label="moorning button group">
+                                    <input type="checkbox" class="btn-check" id="btncheck6" name="course_i[]" value="6" autocomplete="off" disabled>
+                                    <label class="btn btn-outline-secondary" for="btncheck6">第11节</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <!-- 提交查询 -->
+                <div class="pt-3">
+                    <button type="submit" class="btn btn-primary mb-3">查询🔎</button>
+                </div>
+
+
+
+
+
+                <div class="pt-3">
+
+                    <!-- 校区选择 -->
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="district" id="inlineRadio1" value="1" checked="checked">
+                        <label class="form-check-label" for="inlineRadio1">长清</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="district" id="inlineRadio3" value="3">
+                        <label class="form-check-label" for="inlineRadio3">历城</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="district" id="inlineRadio4" value="4">
+                        <label class="form-check-label" for="inlineRadio4">菏泽</label>
+                    </div>
+                    <br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="NULL" disabled>
+                        <label class="form-check-label" for="inlineRadio3">彩石(暂不可用)</label>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+</div>
+
+
+
+
+
+
+
+
+</form>
+
+</div>
+
+
+
+<!--    保证复选框至少有一项-->
+<!-- <script>
+            var requiredCheckboxes = $(':checkbox[required]');
+            requiredCheckboxes.on('change', function(e) {
+                undefined
+                var checkboxGroup = requiredCheckboxes.filter('[name=" ' + $(this).attr('name ') + ' "]');
+                var isChecked = checkboxGroup.is(':checked');
+                checkboxGroup.prop('required', !isChecked);
+            });
+        </script> -->
+
+
+<script>
+    var requiredCheckboxes = $(':checkbox[required]');
+    requiredCheckboxes.on('change', function(e) {
+        var checkboxGroup = requiredCheckboxes.filter('[name="' + $(this).attr('name') + '"]');
+        var isChecked = checkboxGroup.is(':checked');
+        checkboxGroup.prop('required', !isChecked);
+    });
+</script>
