@@ -3,7 +3,9 @@ from lxml import etree
 import joblib
 import json
 import yaml
-
+import pytz
+import datetime
+import time
 
 # 加载配置文件
 def load_config():
@@ -12,7 +14,18 @@ def load_config():
         cfg = yaml.safe_load(f)
     return cfg
 
-
+#定义获取当前时间的函数
+def get_now_time():
+    tz = pytz.timezone("Asia/Shanghai")  # 东八区
+    time_now = datetime.datetime.fromtimestamp(int(time.time()), pytz.timezone("Asia/Shanghai"))
+    
+    year = time_now.year  # 年
+    month = time_now.month  # 月
+    day = time_now.day  # 日
+    hour = time_now.hour  # 小时
+    minute = time_now.minute  # 分钟
+    
+    return year, month, day, hour, minute
 
 
 # 获取课表信息
@@ -226,6 +239,18 @@ if __name__ == '__main__':
         # joblib.dump(course_on_table, './static/data/course_on_table.pkl',compress=3)
         joblib.dump(all_classroom, r'./static/data/all_classroom_%d.pkl'%district)
         print("保存成功！")
+
+
+
+    # 保存时间戳
+    print("正在保存时间戳到文件...")
+    now_time = {"year": 0, "month": 0, "day": 0, "hour": 0, "minute": 0}
+    now_time["year"], now_time["month"], now_time["day"], now_time["hour"], now_time["minute"] = get_now_time()
+    with open("./static/data/modified_time.json" , "w") as f:
+        json.dump(now_time, f)
+    print("课表信息更新至",get_now_time())
+
+
 
     #print(course_on_table['1号公教楼JT102'][1][1])
     # print(course_on_table[3][1][1]['1号公教楼JT104'])

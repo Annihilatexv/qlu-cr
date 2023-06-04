@@ -9,7 +9,7 @@ import yaml
 from qlu_lib import get_time, get_lib_seat
 from query_classroom import query_room
 from get_schedule import school_schedule, exam_remain_day
-
+import json
 
 
 # 加载配置文件（无地安放2333）
@@ -18,6 +18,20 @@ def load_config():
     with open(yaml_file, 'r', encoding='utf-8') as f:
         cfg = yaml.safe_load(f)
     return cfg
+
+def get_table_version():
+    # 读取 modified_time.json 文件
+    with open('./static/data/modified_time.json', 'r') as f:
+        time_dict = json.load(f)
+
+    # 将时间戳格式化为需要的格式
+    modified_time = '{0}.{1}.{2} {3}:{4}'.format(time_dict['year'], time_dict['month'], time_dict['day'], time_dict['hour'], time_dict['minute'])
+
+    # 输出结果
+    return modified_time
+
+
+
 
 
 cfg = load_config()
@@ -44,7 +58,7 @@ def index():
     dt, hm, av_seat_list, un_seat_list= get_lib_seat()
 
     # render_template , 直接会在templates里边找xx.html文件
-    return render_template("home.html", exam_time=exam_time, weeks=weeks_list, week_i=week_i_list, dt=dt, hm=hm,
+    return render_template("home.html", exam_time=exam_time,modified_time=get_table_version(), weeks=weeks_list, week_i=week_i_list, dt=dt, hm=hm,
                            av_seat_list=av_seat_list, un_seat_list=un_seat_list)
 
 
@@ -96,12 +110,12 @@ def post():
     # 获取时间和图书馆座位信息
     dt, hm, av_seat_list, un_seat_list = get_lib_seat()
 
-    return render_template("result.html",checked_date=checked_date, course_info=course_info,
+    return render_template("result.html",checked_date=checked_date,modified_time=get_table_version(), course_info=course_info,
                            available_room=available_room, av_seat_list=av_seat_list, un_seat_list=un_seat_list,
                            exam_time=exam_time)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=81, debug=False)  # 修改代码会立即生效
+    app.run(host='0.0.0.0', port=7694, debug=False)  # 修改代码会立即生效
 
 
