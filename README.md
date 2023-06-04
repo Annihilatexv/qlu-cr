@@ -20,14 +20,14 @@
 2. 进入项目文件夹 ``cd qlu-cr``。
 3. 配置 ``config/config.yaml`` 文件(参考下面)。
 4. 运行一次 ``python get_course_on_table.py``，以获取最新的课表数据。
-5. 运行本项目 ``gunicorn main:app -b 0.0.0.0:7694``。
+5. 运行本项目 ``gunicorn main:app -b 0.0.0.0:7694 -w 4``。
 6. 访问 [ip:7694](http://127.0.0.1:7694)
 
-#### 自动化更新
+#### ~~自动化更新~~(Cookie具有时效性，建议定期 ``python get_course_on_table.py``手动更新数据)
 
-- 强烈建议创建定时任务，运行 ``python get_course_on_table.py``定期更新课表数据。
+- ~~强烈建议创建定时任务，运行 ``python get_course_on_table.py``定期更新课表数据。~~
 
-例如：
+~~例如：~~
 
 ```
 # 编辑crontab定时任务
@@ -43,16 +43,17 @@ crontab -l
 
 ### 2. docker 部署
 
-> docker 版已集成自动更新课表数据
+> ~~docker 版已集成自动更新课表数据~~
 
 1. 下载并修改 [config.yaml](https://github.com/Annihilatexv/qlu-cr/blob/main/config/config.yaml)文件
 2. 启动容器 (注意将“D:\Repositories\DockerStudy\config”替换为[config.yaml](https://github.com/Annihilatexv/qlu-cr/blob/main/config/config.yaml) 所在目录)
 
-
 ```sh
 docker run -dp 7694:7694 --name qlu-cr -v D:\Repositories\DockerStudy\config:/app/config annihilatexv/qlu-cr:latest
 ```
+
 3. 访问 [ip:7694](http://127.0.0.1:7694)
+
 ### 配置文件
 
 ```yaml

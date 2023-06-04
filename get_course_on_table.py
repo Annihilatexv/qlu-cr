@@ -6,6 +6,7 @@ import yaml
 import pytz
 import datetime
 import time
+import os
 
 # 加载配置文件
 def load_config():
@@ -216,13 +217,25 @@ def load_dict(filename):
 if __name__ == '__main__':
     #加载配置
     cfg = load_config()
-
     district_list={1:"changqing",3:"licheng",4:"heze"}
+
+    # 添加对各容器的支持，检查环境变量是否存在
+    if "table_url" in os.environ:
+        table_url = os.environ["table_url"]
+    else:
+        table_url = cfg["string"]["table_url"]
+    
+    if "Cookie" in os.environ:
+        Cookie = os.environ["Cookie"]
+    else:
+        Cookie = cfg["string"]["Cookie"]
+
+
 
     #遍历所有校区
     for district in district_list:
         print("<<<<<<<<%s校区>>>>>>>>>"%district_list[district])
-        table=get_table(cfg['string']['Cookie'],cfg['string']['table_url'],district)
+        table=get_table(Cookie,table_url,district)
         if len(table):
             print("获取课表完成：", len(table))
         else:

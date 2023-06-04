@@ -10,6 +10,7 @@ from qlu_lib import get_time, get_lib_seat
 from query_classroom import query_room
 from get_schedule import school_schedule, exam_remain_day
 import json
+import os
 
 
 # 加载配置文件（无地安放2333）
@@ -45,6 +46,7 @@ exam_time = exam_remain_day(cfg['list']['exam_day'])
 
 @app.route("/")
 def index():
+    #print(os.environ["table_url"],os.environ["Cookie"])
     # 获取当前教学周和星期数，并进行html处理
     weeks, week_i = school_schedule(cfg['list']['new_semester'])
 
