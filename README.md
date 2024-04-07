@@ -8,7 +8,7 @@
 
 ### Preview
 
-![Preview.png](https://i.328888.xyz/2023/03/18/MkKKJ.png)
+![Preview.png](https://github.com/Annihilatexv/picx-images-hosting/raw/master/GitHub/课表查询（拼接）.png)
 
 ## 部署
 
